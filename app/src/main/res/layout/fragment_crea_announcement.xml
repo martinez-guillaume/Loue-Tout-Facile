@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/frameLayout5"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_gradient"
+    tools:context=".ui.creaArticle.CreaAnnouncementFragment" >
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Créer une annonce"
+        android:layout_marginTop="30dp"
+        android:textColor="#0099CC"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/et_title_crea_announcement_fragment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        android:autofillHints="title"
+        android:backgroundTint="#B6B6B6"
+        android:ems="10"
+        android:hint="titre"
+        android:inputType="text"
+        android:maxLength="80"
+        android:minHeight="48dp"
+        android:textColorHint="#0099CC"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        tools:ignore="VisualLintTextFieldSize" />
+
+    <TextView
+        android:id="@+id/tv_content_text_crea_announcement_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:text="Contenu"
+        android:textColor="#0099CC"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_title_crea_announcement_fragment" />
+
+    <EditText
+        android:id="@+id/et_content_crea_fragment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:autofillHints="content"
+        android:backgroundTint="#B6B6B6"
+        android:inputType="textMultiLine"
+        android:minHeight="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content_text_crea_announcement_fragment"
+        tools:ignore="SpeakableTextPresentCheck,VisualLintTextFieldSize" />
+
+    <EditText
+        android:id="@+id/et_picture_crea_announcement_fragment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:autofillHints="Picture"
+        android:backgroundTint="#B6B6B6"
+        android:ems="10"
+        android:hint="Image url"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:textColorHint="#0099CC"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_content_crea_fragment"
+        tools:ignore="VisualLintTextFieldSize" />
+
+    <ImageView
+        android:id="@+id/iv_crea_announcement_fragment"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/logo_loue_tout_facile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_picture_crea_announcement_fragment"
+        android:contentDescription="image par défaut" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_crea_announcement_fragment">
+
+        <RadioButton
+            android:id="@+id/rb_manutention_crea_announcement_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Manutention"
+            app:layout_constraintStart_toEndOf="@+id/radioButton1" />
+
+        <RadioButton
+            android:id="@+id/rb_outillage_crea_announcement_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Outillage"
+            app:layout_constraintStart_toEndOf="@+id/radioButton2" />
+
+        <RadioButton
+            android:id="@+id/rb_gardening_crea_article_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Espaces verts"
+            app:layout_constraintStart_toEndOf="@+id/radioButton3" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/radioGroup2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup">
+
+        <RadioButton
+            android:id="@+id/rb_status_rented_crea_announcement_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Loué"
+            app:layout_constraintStart_toEndOf="@+id/radioButton4" />
+
+        <RadioButton
+            android:id="@+id/rb_status_reserved_crea_announcement_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Réservé"
+            app:layout_constraintStart_toEndOf="@+id/radioButton5" />
+
+        <RadioButton
+            android:id="@+id/rb_status_available_crea_article_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Disponible"
+            app:layout_constraintStart_toEndOf="@+id/radioButton6" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/et_price_crea_announcement_fragment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:autofillHints="title"
+        android:backgroundTint="#B6B6B6"
+        android:ems="10"
+        android:hint="prix"
+        android:inputType="text"
+        android:maxLength="80"
+        android:minHeight="48dp"
+        android:textColorHint="#0099CC"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup2"
+        tools:ignore="VisualLintTextFieldSize" />
+
+    <Button
+        android:id="@+id/btn_submit_crea_article_activity"
+        style="@style/CustomMaterialButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:paddingStart="46dp"
+        android:paddingEnd="46dp"
+        android:text="Valider"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_price_crea_announcement_fragment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="VisualLintButtonSize" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

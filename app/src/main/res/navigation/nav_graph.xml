@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.louetoutfacile.ui.splash.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.louetoutfacile.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="false"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.louetoutfacile.ui.main.MainFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_creaAnnouncementFragment"
+            app:destination="@id/creaAnnouncementFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_agencyPresentation"
+            app:destination="@id/agencyPresentation" />
+        <action
+            android:id="@+id/action_mainFragment_to_rentalConditionFragment"
+            app:destination="@id/rentalConditionFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_detailAnnouncementFragment"
+            app:destination="@id/detailAnnouncementFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.example.louetoutfacile.ui.register.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in">
+
+        <action
+            android:id="@+id/action_signInFragment_to_homeFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="false"/>
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/creaAnnouncementFragment"
+        android:name="com.example.louetoutfacile.ui.creaArticle.CreaAnnouncementFragment"
+        android:label="fragment_crea_announcement"
+        tools:layout="@layout/fragment_crea_announcement" />
+    <action
+        android:id="@+id/action_creaAnnouncementFragment_to_mainFragment"
+        app:destination="@id/mainFragment" />
+
+
+    <fragment
+        android:id="@+id/agencyPresentation"
+        android:name="com.example.louetoutfacile.ui.agencyPresentation.AgencyPresentation"
+        android:label="fragment_agency_presentation"
+        tools:layout="@layout/fragment_agency_presentation" />
+
+
+    <fragment
+        android:id="@+id/rentalConditionFragment"
+        android:name="com.example.louetoutfacile.ui.rentalCondition.RentalConditionFragment"
+        android:label="RentalConditionFragment" />
+
+
+    <fragment
+        android:id="@+id/detailAnnouncementFragment"
+        android:name="com.example.louetoutfacile.ui.detailsArticle.DetailAnnouncementFragment"
+        android:label="fragment_detail_announcement"
+        tools:layout="@layout/fragment_detail_announcement" >
+        <argument
+            android:name="equipmentId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_detailAnnouncementFragment_to_editAnnouncementFragment"
+            app:destination="@id/editAnnouncementFragment" >
+        <argument
+            android:name="equipmentId"
+            app:argType="long" />
+        </action>
+        <action
+            android:id="@+id/actionDetailAnnouncementFragmentToMainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/editAnnouncementFragment"
+        android:name="com.example.louetoutfacile.ui.editArticle.EditAnnouncementFragment"
+        android:label="fragment_edit_announcement"
+        tools:layout="@layout/fragment_edit_announcement" >
+        <argument
+            android:name="equipmentId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_editAnnouncementFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+</navigation>

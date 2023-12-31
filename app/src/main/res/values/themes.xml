@@ -1,0 +1,19 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.LoueToutFacile" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Afin de changer la couleur de la barre en haut du téléphone -->
+        <item name="android:statusBarColor">@color/black</item>
+    </style>
+
+    <style name="Theme.LoueToutFacile" parent="Base.Theme.LoueToutFacile" />
+
+    <style name="CustomMaterialButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">#4577D9</item>
+    </style>
+    <style name="DatePickerButtonStyle" parent="Widget.MaterialComponents.Button">
+    <item name="android:backgroundTint">#FFFFFF</item>
+    <item name="android:textColor">@color/black</item>
+
+    <!-- Autres propriétés si nécessaire -->
+</style>
+</resources>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Loue Tout Facile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="material_icon_perm_identity">&#xe8a6;</string> <!-- Code UTF-8 pour perm_identity -->
+    <string name="welcome_prompt">"Bonjour\n  %1$s %2$s \n Tu es %3$s !"</string><!-- variable dans xml variable 1 , 2 et 3 -->
+</resources>

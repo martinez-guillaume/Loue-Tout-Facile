@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/frameLayout6"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_gradient"
+    tools:context=".ui.rentalCondition.RentalConditionFragment" >
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Conditions générales de location"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/et_title_crea_announcement_fragment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        android:ems="10"
+        android:text="Art. 1 - Conditions requises pour louer\n\n
+L'âge minimum est 18 ans. LoueToutFacile peut soumettre la location à la présentation de documents (pièce d’identité, permis de conduire, justificatif de domicile) dont la copie peut être conservée, et exiger une garantie financière dont la remise s'effectue par tout moyen accepté par LoueToutFacile qui peut l'encaisser à tout moment sans avis préalable, à charge de la restituer après règlement des sommes dues et retour du bien loué en bon état. Le montant de cette garantie ne limite pas la responsabilité financière du locataire qui peut être engagée au-delà."
+        android:textColorHint="#0099CC"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        tools:ignore="VisualLintTextFieldSize" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:text="Art. 2 - Récupération et Restitution du Matériel\n\n Toute réservation confirmée qui ne sera pas honorée dans un délai d'une journée au-delà de la date prévue entraînera le droit pour LoueToutFacile de remettre le matériel en location.\n\nLa récupération du matériel loué s'effectue à notre agence de Salon de Provence. L'utilisateur est tenu de restituer le matériel à la même agence. En cas de non-restitution dans un délai de 7 jours à compter de la date de fin de location, nous nous réservons le droit d'encaisser le montant total de la caution. Il est important de respecter les délais et conditions de restitution pour éviter tout désagrément."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_title_crea_announcement_fragment" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="30dp"
+        android:text="Art. 3 - Durée de location \n\n
+La location prend effet au moment où le matériel est mis à disposition du locataire. Cette date est fixée sur le contrat ou le bon de livraison. La charge des risques est alors transférée au locataire. La location et la garde juridique prennent fin dès le retour complet du matériel en agence ou la reprise par Kiloutou."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:text="Art. 4 - Mise à disposition\n\n
+1. LoueToutFacile ne peut être tenue responsable des retards de mise à disposition ou de livraison dus à toute raison indépendante de sa volonté, tels que grève, force majeure, modification de réglementation, ni de leurs conséquences et n'est redevable d'aucune indemnité à ce titre.
+Locataire Professionnel : il lui appartient de choisir le matériel en fonction de ses besoins, qu’il a lui-même déterminés au préalable, et de vérifier qu'il soit adéquat. LoueToutFacile n’a pas connaissance de son projet ni l'obligation de vérifier son choix sur la compatibilité du matériel à son projet.\n\n
+
+2. LoueToutFacile s’engage à remettre au locataire un matériel conforme aux réglementations en vigueur en France, notamment concernant la sécurité et l'hygiène des travailleurs, en bon état d’usage et d’entretien, avec les accessoires nécessaires, les instructions de montage, la notice d’utilisation et les consignes de sécurité. Le cas échéant, les équipements de protection individuels sont remis avec le matériel. A défaut d'utilisation, (sachet de protection inviolé), ils sont repris par LoueToutFacile.
+Lors de la prise de possession du matériel, le locataire vérifie la remise de ces éléments et l’état apparent du matériel, en vue de faire toute réserve qu’il juge utile. A défaut de réserve, le matériel est réputé avoir été remis au locataire en bon état apparent. Un défaut non apparent ou une réclamation technique peut être signalé à tout moment de la location et au plus tard dans les 5 jours de la constatation.\n\n
+
+3. Le transport, chargement, attelage, arrimage et déchargement du matériel sont à la charge et sous la responsabilité du locataire. En cas de livraison, le locataire doit remettre au chauffeur les instructions particulières en vigueur sur le site. En cas d'absence du locataire, LoueToutFacile dépose sur le matériel ou envoie le bon de livraison par mail. A défaut de réserves sur l’état apparent du matériel formulées dans les 4 heures suivant la livraison ou l’envoi du mail, le locataire est réputé avoir réceptionné le matériel, conforme à sa commande, en bon état apparent, avec les accessoires nécessaires. Pour que les réserves soient recevables, le matériel ne doit pas avoir été utilisé sauf au titre des tests de fonctionnement. Toute autre utilisation vaut réception sans réserve. Installation, montage et démontage sont effectués sous la responsabilité du locataire qui s'engage à prendre connaissance des règles de montage, de fonctionnement et de sécurité. L’obligation de LoueToutFacile se limite à la remise des notices.\n\n
+
+"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
