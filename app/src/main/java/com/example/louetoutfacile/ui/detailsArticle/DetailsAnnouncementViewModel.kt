@@ -127,39 +127,61 @@ class DetailsAnnouncementViewModel @Inject constructor(
         }
     }
 
-    fun isEquipmentAvailable(equipmentId: Long, startDate: Date, endDate: Date, callback: (Boolean) -> Unit) {
+    fun isEquipmentAvailable(equipmentId: Long, startDate: Date, endDate: Date, callback: (Boolean, String) -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val existingReservations = reservationDao.getReservationsForEquipment(equipmentId)
-                val isAvailable = existingReservations.none {
+                val conflictingReservations = existingReservations.filter {
                     (startDate.before(it.end_date) && endDate.after(it.start_date)) ||
                             startDate == it.start_date || endDate == it.end_date
                 }
+
+                val formattedConflicts = conflictingReservations.joinToString("\n et du : ") { reservation ->
+                    val formattedStart = formatDate(reservation.start_date)
+                    val formattedEnd = formatDate(reservation.end_date)
+                    "$formattedStart au $formattedEnd"
+                }
+
+                val isAvailable = conflictingReservations.isEmpty()
+
                 withContext(Dispatchers.Main) {
-                    callback(isAvailable)
+                    callback(isAvailable, formattedConflicts)
                 }
             } catch (e: Exception) {
                 Log.e("DetailsAnnouncementVM", "Erreur lors de la vérification des disponibilités", e)
                 withContext(Dispatchers.Main) {
-                    callback(false)
+                    callback(false, "")
                 }
             }
         }
     }
+
+
+    private fun formatDate(date: Date): String {
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        return dateFormat.format(date)
+    }
+
     fun loadReservationDetails(equipmentId: Long) {
         viewModelScope.launch(Dispatchers.IO) {
             val reservations = reservationDao.getReservationsForEquipment(equipmentId)
             val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)
-            val detailsStringBuilder = StringBuilder()
-            reservations.forEach { reservation ->
-                val user = userDao.findById(reservation.id_user)
-                val startDateFormatted = dateFormat.format(reservation.start_date)
-                val endDateFormatted = dateFormat.format(reservation.end_date)
-                detailsStringBuilder.append("${user.name} ${user.firstname}, du $startDateFormatted au $endDateFormatted\n\n")
+
+            if (reservations.isEmpty()) {
+                _reservationDetails.postValue("Aucune réservation pour le moment...")
+            } else {
+                val detailsStringBuilder = StringBuilder()
+                reservations.forEach { reservation ->
+                    val user = userDao.findById(reservation.id_user)
+                    val startDateFormatted = dateFormat.format(reservation.start_date)
+                    val endDateFormatted = dateFormat.format(reservation.end_date)
+                    detailsStringBuilder.append("${user.name} ${user.firstname},\na réserver du $startDateFormatted au $endDateFormatted\n\n")
+                }
+                _reservationDetails.postValue(detailsStringBuilder.toString())
             }
-            _reservationDetails.postValue(detailsStringBuilder.toString())
         }
     }
+
     fun deleteReservationsForEquipment(equipmentId: Long) {
         viewModelScope.launch(Dispatchers.IO) {
             try {

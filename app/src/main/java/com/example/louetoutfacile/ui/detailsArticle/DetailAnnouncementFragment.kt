@@ -1,3 +1,4 @@
+
 package com.example.louetoutfacile.ui.detailsArticle
 
 import android.app.AlertDialog
@@ -123,7 +124,7 @@ class DetailAnnouncementFragment : Fragment() {
                     return@setOnClickListener
                 }
 
-                viewModel.isEquipmentAvailable(equipmentId, startDate, endDate) { isAvailable ->
+                viewModel.isEquipmentAvailable(equipmentId, startDate, endDate) { isAvailable, unavailableDatesInfo ->
                     if (isAvailable) {
                         AlertDialog.Builder(requireContext())
                             .setTitle("Confirmer la réservation")
@@ -134,7 +135,12 @@ class DetailAnnouncementFragment : Fragment() {
                             .setNegativeButton("Non", null)
                             .show()
                     } else {
-                        Toast.makeText(context, "Cet équipement n'est pas disponible pour les dates sélectionnées", Toast.LENGTH_SHORT).show()
+                        val dialogMessage = "Les dates sélectionnées ne sont pas disponibles. \n\nRéservations existantes du : $unavailableDatesInfo"
+                        AlertDialog.Builder(requireContext())
+                            .setTitle("Information")
+                            .setMessage(dialogMessage)
+                            .setPositiveButton("OK", null)
+                            .show()
                     }
                 }
             } catch (e: ParseException) {
