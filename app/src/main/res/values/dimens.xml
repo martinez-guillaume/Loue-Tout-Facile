@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Other dimensions -->
-    <dimen name="margin_20dp">250dp</dimen>
+    <dimen name="margin_20dp">0dp</dimen>
 </resources>

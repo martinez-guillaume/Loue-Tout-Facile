@@ -53,22 +53,6 @@ object NetworkModule {
             .build()
     }
 
-   /* @Singleton
-    @Provides
-    fun provideRetrofit(moshi: Moshi, client: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(ApiArticleRoutes.BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .client(client)
-            .build()
-    }
-
-    @Singleton
-    @Provides
-    fun provideApiCountryInterface(retrofit: Retrofit): ApiArticleInterface {
-        return retrofit.create(ApiArticleInterface::class.java)
-    }*/
-
     @Provides
     @Singleton
     fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences {

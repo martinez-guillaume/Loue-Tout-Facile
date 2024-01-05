@@ -74,6 +74,16 @@ data class Status(
     @ColumnInfo(name = "name") val name: String
 )
 
+// DTO pour afficher les reservation dans detail fragment
+@Entity
+data class ReservationDetail(
+    val id: Long,
+    val userName: String,
+    val firstname: String,
+    val startDate: String,
+    val endDate: String,
+)
+
 // Entité Retour
 @Entity(tableName = "retour")
 data class Retour(
@@ -222,6 +232,10 @@ interface ReservationDao {
 
     @Query("DELETE FROM reservation WHERE id_equipment = :equipmentId")
     fun deleteReservationsByEquipmentId(equipmentId: Long)
+
+    @Query("DELETE FROM reservation WHERE id = :reservationId")
+    fun deleteReservationById(reservationId: Long)
+
 
     @Insert
     fun insert(reservation: Reservation)
