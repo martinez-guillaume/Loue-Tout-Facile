@@ -12,6 +12,7 @@ import com.example.louetoutfacile.network.Equipment
 import com.example.louetoutfacile.network.EquipmentDao
 import com.example.louetoutfacile.network.Reservation
 import com.example.louetoutfacile.network.ReservationDao
+import com.example.louetoutfacile.network.ReservationDetail
 import com.example.louetoutfacile.network.StatusDao
 import com.example.louetoutfacile.network.UserDao
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,6 +21,7 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Locale
 import kotlinx.coroutines.withContext
+import java.util.Calendar
 import java.util.Date
 import javax.inject.Inject
 
@@ -44,14 +46,21 @@ class DetailsAnnouncementViewModel @Inject constructor(
     private val _deletionSuccess = MutableLiveData<Boolean>()
     val deletionSuccess: LiveData<Boolean> = _deletionSuccess
 
-    private val _reservationDetails = MutableLiveData<String>()
-    val reservationDetails: LiveData<String> = _reservationDetails
-
     private val _reservationDeletionSuccess = MutableLiveData<Boolean>()
     val reservationDeletionSuccess: LiveData<Boolean> = _reservationDeletionSuccess
 
     private val _reservationMessage = MutableLiveData<String>()
     val reservationMessage: LiveData<String> = _reservationMessage
+
+    private val _reservationDetails = MutableLiveData<List<ReservationDetail>>()
+    val reservationDetails: LiveData<List<ReservationDetail>> = _reservationDetails
+
+    private val _noReservationsMessage = MutableLiveData<String>()
+    val noReservationsMessage: LiveData<String> = _noReservationsMessage
+
+    private val _singleReservationDeletionSuccess = MutableLiveData<Boolean>()
+    val singleReservationDeletionSuccess: LiveData<Boolean> = _singleReservationDeletionSuccess
+
 
     fun loadEquipmentDetails(equipmentId: Long) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -69,7 +78,7 @@ class DetailsAnnouncementViewModel @Inject constructor(
                     }
                 } else {
                     // Pour un utilisateur non admin, laisser le statut tel quel
-                    if (statusName == "Réservé") "Disponible" else statusName
+                    if (statusName == "Réservé" || statusName == "Disponible") "Disponible" else "Non disponible aujourd'hui"
                 }
                 _statusName.postValue(displayStatus)
             } catch (e: Exception) {
@@ -101,10 +110,8 @@ class DetailsAnnouncementViewModel @Inject constructor(
     }
 
     fun reserveEquipment(equipmentId: Long, startDate: Date, endDate: Date) {
-
         val userId = userRepository.getUserId()
         if (userId == -1L) {
-            // utilisateur non connecté
             _reservationMessage.postValue("Veuillez vous connecter.")
             return
         }
@@ -119,6 +126,7 @@ class DetailsAnnouncementViewModel @Inject constructor(
                     val newReservation = Reservation(0, userId, equipmentId, startDate, endDate)
                     reservationDao.insert(newReservation)
                     _reservationMessage.postValue("Réservation confirmée")
+                    loadReservationDetails(equipmentId)
                 }
             } catch (e: Exception) {
                 Log.e("DetailsAnnouncementVM", "Erreur lors de la réservation", e)
@@ -127,8 +135,22 @@ class DetailsAnnouncementViewModel @Inject constructor(
         }
     }
 
-    fun isEquipmentAvailable(equipmentId: Long, startDate: Date, endDate: Date, callback: (Boolean, String) -> Unit) {
+    private fun isClosedDay(date: Date): Boolean {
+        val calendar = Calendar.getInstance()
+        calendar.time = date
+        val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
+        return dayOfWeek == Calendar.SUNDAY || dayOfWeek == Calendar.MONDAY
+    }
+
+    fun isEquipmentAvailable(equipmentId: Long, startDate: Date, endDate: Date, callback: (Boolean, Pair<String, String>) -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
+            // Vérification si la date tombe un dimanche ou un lundi
+            if (isClosedDay(startDate) || isClosedDay(endDate)) {
+                withContext(Dispatchers.Main) {
+                    callback(false, Pair("closedDays", "L'agence est fermée les dimanches et lundis."))
+                }
+                return@launch  // Sortie de la coroutine ici
+            }
             try {
                 val existingReservations = reservationDao.getReservationsForEquipment(equipmentId)
                 val conflictingReservations = existingReservations.filter {
@@ -145,12 +167,16 @@ class DetailsAnnouncementViewModel @Inject constructor(
                 val isAvailable = conflictingReservations.isEmpty()
 
                 withContext(Dispatchers.Main) {
-                    callback(isAvailable, formattedConflicts)
+                    if (isAvailable) {
+                        callback(true, Pair("available", "yeeepppaaa"))
+                    } else {
+                        callback(false, Pair("conflict", formattedConflicts))
+                    }
                 }
             } catch (e: Exception) {
                 Log.e("DetailsAnnouncementVM", "Erreur lors de la vérification des disponibilités", e)
                 withContext(Dispatchers.Main) {
-                    callback(false, "")
+                    callback(false, Pair("error", "Erreur lors de la vérification des disponibilités"))
                 }
             }
         }
@@ -162,25 +188,30 @@ class DetailsAnnouncementViewModel @Inject constructor(
         return dateFormat.format(date)
     }
 
+
     fun loadReservationDetails(equipmentId: Long) {
         viewModelScope.launch(Dispatchers.IO) {
-            val reservations = reservationDao.getReservationsForEquipment(equipmentId)
-            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)
-
-            if (reservations.isEmpty()) {
-                _reservationDetails.postValue("Aucune réservation pour le moment...")
-            } else {
-                val detailsStringBuilder = StringBuilder()
-                reservations.forEach { reservation ->
+            try {
+                val reservations = reservationDao.getReservationsForEquipment(equipmentId)
+                val reservationDetails = reservations.map { reservation ->
                     val user = userDao.findById(reservation.id_user)
-                    val startDateFormatted = dateFormat.format(reservation.start_date)
-                    val endDateFormatted = dateFormat.format(reservation.end_date)
-                    detailsStringBuilder.append("${user.name} ${user.firstname},\na réserver du $startDateFormatted au $endDateFormatted\n\n")
+                    val startDateFormatted = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(reservation.start_date)
+                    val endDateFormatted = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(reservation.end_date)
+                    ReservationDetail(
+                        id = reservation.id,
+                        userName = user.name,
+                        firstname = user.firstname,
+                        startDate = startDateFormatted,
+                        endDate = endDateFormatted
+                    )
                 }
-                _reservationDetails.postValue(detailsStringBuilder.toString())
+                _reservationDetails.postValue(reservationDetails)
+            } catch (e: Exception) {
+                Log.e("DetailsAnnouncementVM", "Error loading reservation details", e)
             }
         }
     }
+
 
     fun deleteReservationsForEquipment(equipmentId: Long) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -188,6 +219,22 @@ class DetailsAnnouncementViewModel @Inject constructor(
                 reservationDao.deleteReservationsByEquipmentId(equipmentId)
                 _reservationDeletionSuccess.postValue(true)
             } catch (e: Exception) {
+                _reservationDeletionSuccess.postValue(false)
+            }
+        }
+    }
+    fun deleteReservation(reservationId: Long,equipmentId: Long) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                try {
+                    reservationDao.deleteReservationById(reservationId)
+                    _singleReservationDeletionSuccess.postValue(true)
+                    loadReservationDetails(equipmentId)
+                } catch (e: Exception) {
+                    _singleReservationDeletionSuccess.postValue(false)
+                }
+            } catch (e: Exception) {
+                Log.e("ViewModel", "Erreur lors de la suppression de la réservation", e)
                 _reservationDeletionSuccess.postValue(false)
             }
         }
