@@ -104,7 +104,13 @@ class DetailAnnouncementFragment : Fragment() {
 
 
         viewModel.reservationMessage.observe(viewLifecycleOwner) { message ->
-            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            if (message.isNotEmpty()) {
+                AlertDialog.Builder(requireContext())
+                    .setTitle("\uD83C\uDF89 Réservation Confirmée ! \uD83C\uDF89")
+                    .setMessage(message)
+                    .setPositiveButton("OK", null)
+                    .show()
+            }
         }
 
         binding.btnReservationDetailsAnnouncementFragment.setOnClickListener {

@@ -15,7 +15,8 @@
         android:src="@drawable/logo_loue_tout_facile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/main_logo_desc" />
 
     <ImageView
         android:id="@+id/iv_shopping_cart_main_fragment"
@@ -25,18 +26,19 @@
         app:layout_constraintBottom_toBottomOf="@+id/iv_logo_main_fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_logo_main_fragment"
-        app:layout_constraintTop_toTopOf="@+id/iv_logo_main_fragment" />
+        app:layout_constraintTop_toTopOf="@+id/iv_logo_main_fragment"
+        android:contentDescription="@string/phone_icon_desc" />
 
     <ImageView
         android:id="@+id/iv_logout__main_fragment"
         android:layout_width="30dp"
         android:layout_height="wrap_content"
-
         android:src="@android:drawable/ic_lock_power_off"
         app:layout_constraintBottom_toBottomOf="@+id/iv_logo_main_fragment"
         app:layout_constraintEnd_toStartOf="@+id/iv_logo_main_fragment"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/iv_logo_main_fragment" />
+        app:layout_constraintTop_toTopOf="@+id/iv_logo_main_fragment"
+        android:contentDescription="@string/logout_icon_desc" />
 
     <AutoCompleteTextView
         android:id="@+id/category_autocomplete"
@@ -45,7 +47,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
-        android:hint="Recherchez par matériel"
+        android:hint="@string/search_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_logo_main_fragment" />
@@ -66,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="75dp"
-        android:text="LoueToutFacile"
+        android:text="@string/louetoutfacile_main"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,7 +83,7 @@
         android:background="@drawable/button_background"
         android:paddingStart="46dp"
         android:paddingEnd="46dp"
-        android:text=" Ajouter une annonce"
+        android:text="@string/add_announcement_button"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,7 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Notre Agence"
+        android:text="@string/our_agency_link"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
@@ -103,7 +105,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Conditions générales de location"
+        android:text="@string/rental_terms"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_agency_presentation_main_fragment" />
@@ -112,7 +114,7 @@
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Besoin d'aide ?"
+        android:text="@string/need_help"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/iv_shopping_cart_main_fragment"
         app:layout_constraintStart_toStartOf="@+id/iv_shopping_cart_main_fragment"

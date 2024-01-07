@@ -23,7 +23,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/logo_loue_tout_facile"
-            android:contentDescription="image de l'annonce" />
+            android:contentDescription="@string/article_image_description" />
 
         <TextView
             android:id="@+id/text_article_item_rv"
@@ -66,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:text="voir >>"
+            android:text="@string/see_announcement"
             app:layout_constraintBottom_toBottomOf="@+id/text_article_item_rv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/text_article_item_rv"

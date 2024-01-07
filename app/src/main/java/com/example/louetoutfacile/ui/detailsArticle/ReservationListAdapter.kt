@@ -30,7 +30,7 @@ class ReservationListAdapter(
             val formattedDates = "Du : ${reservationDetail.startDate} au ${reservationDetail.endDate}"
             binding.tvReservationStartAndEndDateDetailAnnouncementFragment.text = formattedDates
 
-            // Ajouter un écouteur de clic sur l'ImageView de suppression
+            // l'ImageView de suppression (poubelle rouge)
             binding.ivDeleteReservationDetailAnnouncementFragment.setOnClickListener {
                 onDeleteClicked(reservationDetail.id)
             }
@@ -42,7 +42,7 @@ class ReservationListAdapter(
         return ReservationViewHolder(binding,onDeleteClicked)
     }
 
-    override fun onBindViewHolder(holder: ReservationListAdapter.ReservationViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ReservationViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 

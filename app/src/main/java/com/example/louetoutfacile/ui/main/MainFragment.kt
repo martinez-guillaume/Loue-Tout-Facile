@@ -60,7 +60,7 @@ class MainFragment : Fragment() {
         }
 
 
-        // Récupérer l'état d'administrateur depuis le ViewModel
+        // recupére l'état d'administrateur depuis le ViewModel
         viewModel.isAdmin()
 
         val adapter = AnnouncementListAdapter(
@@ -133,11 +133,12 @@ class MainFragment : Fragment() {
         _binding = null
     }
 
+    // demande de permission pour utiliser le telephone
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_PHONE_CALL && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             val callIntent = Intent(Intent.ACTION_CALL)
-            callIntent.data = Uri.parse("tel:0123456789") // Votre numéro
+            callIntent.data = Uri.parse("tel:0123456789")
             startActivity(callIntent)
         }
     }

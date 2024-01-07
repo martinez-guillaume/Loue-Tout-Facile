@@ -1,7 +1,138 @@
 <resources>
     <string name="app_name">Loue Tout Facile</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="material_icon_perm_identity">&#xe8a6;</string> <!-- Code UTF-8 pour perm_identity -->
-    <string name="welcome_prompt">"Bonjour\n  %1$s %2$s \n Tu es %3$s !"</string><!-- variable dans xml variable 1 , 2 et 3 -->
+
+    <!-- Strings Crea_announcement_fragment -->
+    <string name="create_announcement">Create an Announcement</string>
+    <string name="title">Title</string>
+    <string name="content">Content</string>
+    <string name="image_url">Image URL</string>
+    <string name="default_image">Default Image</string>
+    <string name="handling">Handling</string>
+    <string name="tooling">Tooling</string>
+    <string name="green_spaces">Green Spaces</string>
+    <string name="rented">Rented</string>
+    <string name="reserved">Reserved</string>
+    <string name="available">Available</string>
+    <string name="price">Price</string>
+    <string name="validate">Validate</string>
+
+
+    <!-- Strings agency_presentation_fragment -->
+    <string name="our_agency">Our Agency</string>
+    <string name="agency_description">Our agency LoueToutFacile offers you the widest range of tools and construction equipment on the market. We guarantee reliable and robust equipment thanks to the checks carried out.</string>
+    <string name="contact_details">LoueToutFacile \n116 Avenue de Bresse\n13300 Salon de Provence \n\n tel : 04 42 28 98 01</string>
+    <string name="agency_opening_hours">Agency Opening Hours\n\nMonday: Closed \nTuesday: 07:00–12:00, 13:30–18:00 \nWednesday: 07:00–12:00, 13:30–18:00 \nThursday: 07:00–12:00, 13:30–18:00 \nFriday: 07:00–12:00, 13:30–18:00 \nSaturday: 08:00–12:00 \nSunday: Closed</string>
+    <string name="accepted_payment_methods">Accepted Payment Methods</string>
+    <string name="content_description_mastercard">Mastercard logo</string>
+    <string name="content_description_visa">Visa logo</string>
+    <string name="content_description_cheque">Image of a cheque</string>
+
+
+    <!-- Strings detail_announcement_fragment -->
+    <string name="detail_announcement">Announcement Details</string>
+    <string name="reservation_period">What is your rental period?</string>
+    <string name="from_date">From:</string>
+    <string name="to_date">To:</string>
+    <string name="price_per_day">Price per day (TTC)</string>
+    <string name="reserve_button">Reserve</string>
+    <string name="reservation_details_title">Reservation Details:</string>
+    <string name="no_reservation_message">No reservations at the moment…</string>
+    <string name="reset_reservations_button">Reset Reservations</string>
+    <string name="what_is_your_rental_period">What is your rental period?</string>
+    <string name="delete_content_description">Delete icon</string>
+    <string name="edit_content_description">Edit icon</string>
+    <string name="announcement_image_content_description">Announcement image</string>
+    <string name="start_date">Start</string>
+    <string name="end_date">End</string>
+
+
+
+    <!-- Strings edit_announcement_fragment -->
+    <string name="edit_announcement_title">Edit Announcement</string>
+    <string name="content_label">Content</string>
+    <string name="image_url_hint">Image URL</string>
+    <string name="handling_option">Handling</string>
+    <string name="tools_option">Tools</string>
+    <string name="green_spaces_option">Green Spaces</string>
+    <string name="rented_status">Rented</string>
+    <string name="reserved_status">Reserved</string>
+    <string name="available_status">Available</string>
+    <string name="price_hint">Price</string>
+    <string name="validate_button">Validate</string>
+    <string name="default_image_content_description">Default image</string>
+    <string name="title_hint">Title</string>
+
+
+
+    <!-- Strings login_fragment -->
+    <string name="login_title">Log In</string>
+    <string name="login_hint">Login</string>
+    <string name="password_hint">Password</string>
+    <string name="login_button_text">Log In</string>
+    <string name="register_prompt">Don\'t have an account? Sign up!</string>
+
+
+    <!-- Strings main_fragment -->
+    <string name="main_logo_content_desc">Main logo</string>
+    <string name="shopping_cart_icon_content_desc">Shopping cart icon</string>
+    <string name="logout_icon_content_desc">Logout icon</string>
+    <string name="search_hint">Search by equipment</string>
+    <string name="louetoutfacile_main">LoueToutFacile</string>
+    <string name="add_announcement_button">Add an announcement</string>
+    <string name="our_agency_link">Our Agency</string>
+    <string name="rental_terms">General Rental Conditions</string>
+    <string name="need_help">Need Help?</string>
+    <string name="main_logo_desc">LoueToutFacile company logo</string>
+    <string name="phone_icon_desc">Phone icon</string>
+    <string name="logout_icon_desc">Logout icon</string>
+
+
+    <!-- Strings rental_condition_fragment -->
+    <string name="rental_conditions_title">General Rental Conditions</string>
+    <string name="article_1">"Art. 1 - Requirements for Renting\n\n
+Minimum age is 18 years. LoueToutFacile may require the presentation of documents (ID, driving license, proof of address) for which copies can be kept, and require a financial guarantee, provided by any means accepted by LoueToutFacile, which can be cashed at any time without prior notice, to be returned after payment of dues and the return of the rented goods in good condition. The amount of this guarantee does not limit the financial liability of the tenant, which can be engaged beyond it."
+ </string>
+    <string name="article_2">"Art. 2 - Collection and Return of Equipment\n\n
+Any confirmed reservation not honored within a day beyond the scheduled date will entitle LoueToutFacile to put the equipment back up for rental.\n\n
+Collection of rented equipment takes place at our Salon de Provence agency. The user is required to return the equipment to the same agency. In case of non-return within 7 days from the end of the rental period, we reserve the right to charge the total amount of the deposit. It is important to respect the deadlines and conditions of return to avoid any inconvenience."
+  </string>
+    <string name="article_3">"Art. 3 - Duration of Rental\n\n
+The rental takes effect when the equipment is made available to the tenant. This date is set on the contract or delivery note. The risk is then transferred to the tenant. The rental and legal custody end as soon as the complete equipment is returned to the agency or picked up by Kiloutou."
+  </string>
+    <string name="article_4">"Art. 4 - Provision\n\n
+1. LoueToutFacile cannot be held responsible for delays in provision or delivery due to any reason beyond its control, such as strikes, force majeure, regulatory changes, nor for their consequences and is not liable for any compensation for this.\n\nProfessional Tenant: It is their responsibility to choose the equipment according to their needs, which they have previously determined, and to check that it is adequate. LoueToutFacile does not know their project nor has the obligation to verify their choice on the compatibility of the equipment with their project.\n\n
+2. LoueToutFacile commits to providing the tenant with equipment that complies with current regulations in France, particularly regarding worker safety and hygiene, in good working and maintenance condition, with necessary accessories, assembly instructions, user manual, and safety instructions. Where applicable, personal protection equipment is provided with the equipment. If not used (unopened protection bag), they are taken back by LoueToutFacile.\n\n
+3. Transport, loading, hitching, securing, and unloading of the equipment are at the charge and responsibility of the tenant. In case of delivery, the tenant must give the driver the specific instructions in force on the site. In the tenant's absence, LoueToutFacile places the delivery note on the equipment or sends it by email. If no reservations about the apparent condition of the equipment are made within 4 hours of delivery or sending of the email, the tenant is deemed to have received the equipment, conforming to their order, in good apparent condition, with necessary accessories. Any other use implies receipt without reservation. Installation, assembly, and disassembly are carried out under the responsibility of the tenant, who undertakes to familiarize themselves with the assembly, operating, and safety rules. LoueToutFacile's obligation is limited to providing the manuals."
+ </string>
+
+    <!-- Strings sign_in_fragment -->
+    <string name="hint_name">Name</string>
+    <string name="hint_first_name">First Name</string>
+    <string name="title_new_account">New Account</string>
+    <string name="hint_login">Login</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="action_register">Register</string>
+
+    <!-- Strings splash_fragment -->
+    <string name="splash_text">Rent with ease and live the experience.</string>
+    <string name="splash_logo_text">LoueToutFacile</string>
+    <string name="logo_description">LoueToutFacile company logo</string>
+    <string name="delete_reservation_description">Delete reservation</string>
+
+    <!-- Strings item_rv_announcement -->
+    <string name="article_image_description">Image of the article</string>
+    <string name="article_description">Description of the article</string>
+    <string name="article_title">Title of the article</string>
+    <string name="article_price">Price of the article</string>
+    <string name="see_announcement">See more >></string>
+
+
+
+
+
+
+
+
+
 </resources>
