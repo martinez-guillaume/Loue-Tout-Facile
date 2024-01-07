@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Détail de l'annonce"
+        android:text="@string/detail_announcement"
         android:textSize="24sp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +29,8 @@
         android:src="@android:drawable/ic_menu_delete"
         app:layout_constraintBottom_toBottomOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView3" />
+        app:layout_constraintTop_toTopOf="@+id/textView3"
+        android:contentDescription="@string/delete_content_description" />
 
     <ImageView
         android:id="@+id/iv_edit_details_announcement_fragment"
@@ -39,7 +40,8 @@
         android:src="@android:drawable/ic_menu_edit"
         app:layout_constraintBottom_toBottomOf="@+id/textView3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView3" />
+        app:layout_constraintTop_toTopOf="@+id/textView3"
+        android:contentDescription="@string/edit_content_description" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -94,7 +96,8 @@
                     android:layout_marginTop="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_status_detail_announcement_fragment" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_status_detail_announcement_fragment"
+                    android:contentDescription="@string/announcement_image_content_description" />
 
                 <TextView
                     android:id="@+id/tv_content_details_announcement_fragment"
@@ -107,6 +110,16 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/iv_details_announcement_fragment" />
 
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/reservation_period"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
                 <Button
                     android:id="@+id/date_picker_button"
@@ -115,9 +128,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:drawableEnd="@android:drawable/arrow_down_float"
-                    android:drawableRight="@android:drawable/arrow_down_float"
                     android:drawableTint="#000000"
-                    android:text="Début"
+                    android:text="@string/start_date"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -129,9 +141,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:drawableEnd="@android:drawable/arrow_down_float"
-                    android:drawableRight="@android:drawable/arrow_down_float"
                     android:drawableTint="#000000"
-                    android:text="Fin"
+                    android:text="@string/end_date"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/date_picker_button" />
@@ -147,23 +158,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_content_details_announcement_fragment" />
 
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="30dp"
-                    android:text="Quelle est votre période de location ?"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
                 <TextView
                     android:id="@+id/textView12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="Du :"
+                    android:text="@string/from_date"
                     app:layout_constraintBottom_toBottomOf="@+id/date_picker_button"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/date_picker_button" />
@@ -173,7 +174,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="Au :"
+                    android:text="@string/to_date"
                     app:layout_constraintBottom_toBottomOf="@+id/date_picker_button2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/date_picker_button2" />
@@ -182,7 +183,7 @@
                     android:id="@+id/textView14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TTC/jour"
+                    android:text="@string/price_per_day"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_price_details_announcement_fragement" />
@@ -195,7 +196,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
-                    android:text="Réserver"
+                    android:text="@string/reserve_button"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/date_picker_button2" />
@@ -206,7 +207,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="25dp"
-                    android:text="Détails des réservations :"
+                    android:text="@string/reservation_details_title"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/btn_reservation_details_announcement_fragment" />
@@ -231,7 +232,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="30dp"
                     android:paddingBottom="0dp"
-                    android:text="Aucune réservation pour le moment..."
+                    android:text="@string/no_reservation_message"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_title_detail_reservation_detail_announcement_fragment" />
@@ -245,7 +246,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="25dp"
                     android:layout_marginEnd="20dp"
-                    android:text="Réinitialiser les réservations"
+                    android:text="@string/reset_reservations_button"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

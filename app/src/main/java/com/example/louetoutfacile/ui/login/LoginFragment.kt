@@ -23,7 +23,7 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -38,7 +38,21 @@ class LoginFragment : Fragment() {
         binding.btnSubmitLoginFragment.setOnClickListener {
             val login = binding.etLoginLoginFragment.text.toString()
             val password = binding.etPasswordLoginFragment.text.toString()
-            viewModel.loginUser(login, password)
+
+            var isValid = true
+
+            if (login.isBlank()) {
+                binding.etLoginLoginFragment.error = "L'identifiant est requis"
+                isValid = false
+            }
+            if (password.isBlank()) {
+                binding.etPasswordLoginFragment.error = "Le mot de passe est requis"
+                isValid = false
+            }
+
+            if (isValid) {
+                viewModel.loginUser(login, password)
+            }
         }
 
         viewModel.loginState.observe(viewLifecycleOwner) { isSuccess ->

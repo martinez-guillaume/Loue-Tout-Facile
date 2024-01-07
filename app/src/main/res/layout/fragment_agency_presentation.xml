@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Notre agence"
+        android:text="@string/our_agency"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +28,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
         android:ems="10"
-        android:text=" Notre agence LoueToutFacile vous propose la gamme d'outillage et d'engins de chantier la plus large du marché. Nous garantissons un matériel fiable et robuste grâce aux contrôles effectués."
+        android:text="@string/agency_description"
         android:textColorHint="#0099CC"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:gravity="center"
-        android:text="LoueToutFacile \n116 Avenue de Bresse\n13300 Salon de Provence \n\n tel : 04 42 28 98 01"
+        android:text="@string/contact_details"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tewtView7" />
@@ -52,14 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:gravity="center"
-        android:text="Horaires d'ouvertures de l'agence\n\n
-Lundi : Fermé \n
-Mardi : 07:00-12:00, 13:30-18:00 \n
-Mercredi : 07:00-12:00, 13:30-18:00 \n
-Jeudi : 07:00-12:00, 13:30-18:00 \n
-Vendredi : 07:00-12:00, 13:30-18:00 \n
-Samedi : 08:00-12:00 \n
-Dimanche : Fermé \n"
+        android:text="@string/agency_opening_hours"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
@@ -69,7 +62,7 @@ Dimanche : Fermé \n"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Les moyens de paiement acceptés"
+        android:text="@string/accepted_payment_methods"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -82,7 +75,8 @@ Dimanche : Fermé \n"
         android:src="@drawable/mastercard"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+        app:layout_constraintTop_toTopOf="@+id/imageView3"
+        android:contentDescription="@string/content_description_mastercard" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -92,7 +86,8 @@ Dimanche : Fermé \n"
         android:src="@drawable/visa"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        android:contentDescription="@string/content_description_visa" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -102,6 +97,7 @@ Dimanche : Fermé \n"
         android:src="@drawable/cheque"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+        app:layout_constraintTop_toTopOf="@+id/imageView3"
+        android:contentDescription="@string/content_description_cheque" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

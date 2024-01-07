@@ -125,7 +125,10 @@ class DetailsAnnouncementViewModel @Inject constructor(
 
                     val newReservation = Reservation(0, userId, equipmentId, startDate, endDate)
                     reservationDao.insert(newReservation)
-                    _reservationMessage.postValue("Réservation confirmée")
+
+                    val startDateFormatted = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(startDate)
+                    _reservationMessage.postValue("Félicitations !!!\n\nVotre réservation est bien confirmée !!!\n\nNous vous attendons dans notre agence de Salon de Provence le $startDateFormatted pour retirer votre équipement.")
+
                     loadReservationDetails(equipmentId)
                 }
             } catch (e: Exception) {
@@ -168,7 +171,7 @@ class DetailsAnnouncementViewModel @Inject constructor(
 
                 withContext(Dispatchers.Main) {
                     if (isAvailable) {
-                        callback(true, Pair("available", "yeeepppaaa"))
+                        callback(true, Pair("available", ""))
                     } else {
                         callback(false, Pair("conflict", formattedConflicts))
                     }

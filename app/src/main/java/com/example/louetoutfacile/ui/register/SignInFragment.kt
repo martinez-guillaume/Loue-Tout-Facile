@@ -44,10 +44,38 @@ class SignInFragment : Fragment() {
             val password = binding?.etPasswordRegisterFragment?.text.toString()
             val confirmPassword = binding?.etConfirmPasswordRegisterFragment?.text.toString()
 
-            if (password == confirmPassword) {
+            var isValid = true
+
+            if (name.isBlank()) {
+                binding?.etNameSignInFragment?.error = "Le nom est requis"
+                isValid = false
+            }
+            if (firstname.isBlank()) {
+                binding?.etFirstnameSignInFragment?.error = "Le prénom est requis"
+                isValid = false
+            }
+            if (login.isBlank()) {
+                binding?.etLoginRegisterFragment?.error = "L'identifiant est requis"
+                isValid = false
+            }
+            if (password.isBlank()) {
+                binding?.etPasswordRegisterFragment?.error = "Le mot de passe est requis"
+                isValid = false
+            } else if (!isPasswordValid(password)) {
+                binding?.etPasswordRegisterFragment?.error = "Le mot de passe doit contenir au moins 8 caractères, une lettre et un chiffre"
+                isValid = false
+            }
+            if (confirmPassword.isBlank()) {
+                binding?.etConfirmPasswordRegisterFragment?.error = "La confirmation du mot de passe est requise"
+                isValid = false
+            }
+            if (password != confirmPassword) {
+                binding?.etConfirmPasswordRegisterFragment?.error = "Les mots de passe ne correspondent pas"
+                isValid = false
+            }
+
+            if (isValid) {
                 viewModel.inscrireUtilisateur(name, firstname, login, password)
-            } else {
-                Toast.makeText(requireContext(), "Les mots de passe ne correspondent pas", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -58,6 +86,14 @@ class SignInFragment : Fragment() {
             }
         }
     }
+
+    private fun isPasswordValid(password: String): Boolean {
+        // Exemple de regex : au moins 8 caractères, une lettre et un chiffre
+        val passwordRegex = "^(?=.*[0-9])(?=.*[a-zA-Z]).{8,}$".toRegex()
+        return password.matches(passwordRegex)
+    }
+
+
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null

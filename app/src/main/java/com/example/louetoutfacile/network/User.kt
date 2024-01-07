@@ -1,10 +1,6 @@
 package com.example.feedarticlesjetpack.network
 
 import android.content.SharedPreferences
-import com.example.louetoutfacile.network.Equipment
-import com.example.louetoutfacile.network.EquipmentDao
-import com.example.louetoutfacile.network.User
-import com.example.louetoutfacile.network.UserDao
 import javax.inject.Inject
 
 class UserRepository  @Inject constructor(private val sharedPreferences: SharedPreferences){
@@ -15,7 +11,6 @@ class UserRepository  @Inject constructor(private val sharedPreferences: SharedP
             putString("userName", userName)
             putString("userLogin", userLogin)
             putBoolean("isAdmin", userIsAdmin)
-            // Ajoutez ici d'autres informations si nécessaire
             apply()
         }
     }

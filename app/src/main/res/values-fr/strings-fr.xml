@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Loue Tout Facile</string>
+
+    <!-- Strings Crea_announcement_fragment -->
+    <string name="create_announcement">Créer une annonce</string>
+    <string name="title">Titre</string>
+    <string name="content">Contenu</string>
+    <string name="image_url">URL de l\'image</string>
+    <string name="default_image">Image par défaut</string>
+    <string name="handling">Manutention</string>
+    <string name="tooling">Outillage</string>
+    <string name="green_spaces">Espaces verts</string>
+    <string name="rented">Loué</string>
+    <string name="reserved">Réservé</string>
+    <string name="available">Disponible</string>
+    <string name="price">Prix</string>
+    <string name="validate">Valider</string>
+
+    <!-- Strings agency_presentation_fragment -->
+    <string name="our_agency">Notre agence</string>
+    <string name="agency_description">Notre agence LoueToutFacile vous propose la plus large gamme d\'outils et d\'équipements de construction sur le marché. Nous garantissons un équipement fiable et robuste grâce aux contrôles effectués.</string>
+    <string name="contact_details">LoueToutFacile \n116 Avenue de Bresse\n13300 Salon de Provence \n\n tel : 04 42 28 98 01</string>
+    <string name="agency_opening_hours">Heures d\'ouverture de l\'agence\n\nLundi : Fermé \nMardi : 07:00–12:00, 13:30–18:00 \nMercredi : 07:00–12:00, 13:30–18:00 \nJeudi : 07:00–12:00, 13:30–18:00 \nVendredi : 07:00–12:00, 13:30–18:00 \nSamedi : 08:00–12:00 \nDimanche : Fermé</string>
+    <string name="accepted_payment_methods">Moyens de paiement acceptés</string>
+    <string name="content_description_mastercard">Logo Mastercard</string>
+    <string name="content_description_visa">Logo Visa</string>
+    <string name="content_description_cheque">Image d\'un chèque</string>
+
+    <!-- Strings detail_announcement_fragment -->
+    <string name="detail_announcement">Détails de l\'annonce</string>
+    <string name="reservation_period">Quelle est votre période de location ?</string>
+    <string name="from_date">Du :</string>
+    <string name="to_date">Au :</string>
+    <string name="price_per_day">Prix par jour (TTC)</string>
+    <string name="reserve_button">Réserver</string>
+    <string name="reservation_details_title">Détails de la réservation :</string>
+    <string name="no_reservation_message">Pas de réservations pour le moment…</string>
+    <string name="reset_reservations_button">Réinitialiser les réservations</string>
+    <string name="what_is_your_rental_period">Quelle est votre période de location ?</string>
+    <string name="delete_content_description">Icône de suppression</string>
+    <string name="edit_content_description">Icône d\'édition</string>
+    <string name="announcement_image_content_description">Image de l\'annonce</string>
+    <string name="start_date">Début</string>
+    <string name="end_date">Fin</string>
+
+    <!-- Strings edit_announcement_fragment -->
+    <string name="edit_announcement_title">Éditer l\'annonce</string>
+    <string name="content_label">Contenu</string>
+    <string name="image_url_hint">URL de l\'image</string>
+    <string name="handling_option">Manutention</string>
+    <string name="tools_option">Outils</string>
+    <string name="green_spaces_option">Espaces verts</string>
+    <string name="rented_status">Loué</string>
+    <string name="reserved_status">Réservé</string>
+    <string name="available_status">Disponible</string>
+    <string name="price_hint">Prix</string>
+    <string name="validate_button">Valider</string>
+    <string name="default_image_content_description">Image par défaut</string>
+    <string name="title_hint">Titre</string>
+
+    <!-- Strings login_fragment -->
+    <string name="login_title">Connexion</string>
+    <string name="login_hint">Identifiant</string>
+    <string name="password_hint">Mot de passe</string>
+    <string name="login_button_text">Se connecter</string>
+    <string name="register_prompt">Pas de compte ? Inscrivez-vous !</string>
+
+    <!-- Strings main_fragment -->
+    <string name="main_logo_content_desc">Logo principal</string>
+    <string name="shopping_cart_icon_content_desc">Icône de panier</string>
+    <string name="logout_icon_content_desc">Icône de déconnexion</string>
+    <string name="search_hint">Rechercher par équipement</string>
+    <string name="louetoutfacile_main">LoueToutFacile</string>
+    <string name="add_announcement_button">Ajouter une annonce</string>
+    <string name="our_agency_link">Notre agence</string>
+    <string name="rental_terms">Conditions générales de location</string>
+    <string name="need_help">Besoin d\'aide ?</string>
+    <string name="main_logo_desc">Logo de l\'entreprise LoueToutFacile</string>
+    <string name="phone_icon_desc">Icône de téléphone</string>
+    <string name="logout_icon_desc">Icône de déconnexion</string>
+
+    <!-- Strings rental_condition_fragment -->
+    <string name="rental_conditions_title">Conditions générales de location</string>
+    <string name="article_1">"Art. 1 - Conditions requises pour la location\n\n
+L'âge minimum est de 18 ans. LoueToutFacile peut exiger la présentation de documents (identité, permis de conduire, justificatif de domicile) dont les copies peuvent être conservées et demander une garantie financière, fournie par tout moyen accepté par LoueToutFacile, pouvant être encaissée à tout moment sans préavis, à restituer après paiement des sommes dues et retour du bien loué en bon état. Le montant de cette garantie ne limite pas la responsabilité financière du locataire, qui peut être engagée au-delà."
+ </string>
+    <string name="article_2">"Art. 2 - Collecte et restitution de l'équipement\n\n
+Toute réservation confirmée non honorée dans un délai d'un jour au-delà de la date prévue autorise LoueToutFacile à remettre l'équipement en location.\n\n
+La collecte de l'équipement loué se fait à notre agence de Salon de Provence. L'utilisateur doit restituer l'équipement à la même agence. En cas de non-retour dans les 7 jours suivant la fin de la période de location, nous nous réservons le droit de facturer le montant total de la caution. Il est important de respecter les délais et conditions de restitution pour éviter tout désagrément."
+  </string>
+    <string name="article_3">"Art. 3 - Durée de la location\n\n
+La location prend effet lorsque l'équipement est mis à la disposition du locataire. Cette date est fixée sur le contrat ou le bon de livraison. Le risque est alors transféré au locataire. La location et la garde juridique prennent fin dès le retour complet de l'équipement en agence ou sa reprise par Kiloutou."
+  </string>
+    <string name="article_4">"Art. 4 - Mise à disposition\n\n
+1. LoueToutFacile ne peut être tenue responsable des retards de mise à disposition ou de livraison dus à des raisons indépendantes de sa volonté, telles que grèves, force majeure, changements réglementaires, ni de leurs conséquences et n'est pas redevable d'indemnités pour cela.\n\nLocataire professionnel : Il lui incombe de choisir le matériel selon ses besoins, qu'il a déterminés préalablement, et de vérifier qu'il est adéquat. LoueToutFacile ne connaît pas son projet ni n'a l'obligation de vérifier son choix sur la compatibilité du matériel avec son projet.\n\n
+2. LoueToutFacile s'engage à fournir au locataire un matériel conforme aux réglementations en vigueur en France, notamment en matière de sécurité et d'hygiène des travailleurs, en bon état de fonctionnement et d'entretien, avec les accessoires nécessaires, les instructions de montage, le manuel d'utilisation et les consignes de sécurité. Le cas échéant, les équipements de protection individuelle sont fournis avec le matériel. S'ils ne sont pas utilisés (sachet de protection intact), ils sont repris par LoueToutFacile.\n\n
+3. Le transport, le chargement, l'attelage, l'arrimage et le déchargement du matériel sont à la charge et sous la responsabilité du locataire. En cas de livraison, le locataire doit fournir au chauffeur les instructions spécifiques en vigueur sur le site. En l'absence du locataire, LoueToutFacile dépose le bon de livraison sur le matériel ou l'envoie par courriel. Si aucune réserve sur l'état apparent du matériel n'est formulée dans les 4 heures suivant la livraison ou l'envoi du courriel, le locataire est réputé avoir réceptionné le matériel, conforme à sa commande, en bon état apparent, avec les accessoires nécessaires. Toute autre utilisation implique une réception sans réserve. L'installation, le montage et le démontage sont effectués sous la responsabilité du locataire, qui s'engage à se familiariser avec les règles de montage, de fonctionnement et de sécurité. L'obligation de LoueToutFacile se limite à la fourniture des manuels."</string>
+
+    <!-- Strings sign_in_fragment -->
+    <string name="hint_name">Nom</string>
+    <string name="hint_first_name">Prénom</string>
+    <string name="title_new_account">Nouveau Compte</string>
+    <string name="hint_login">Identifiant</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Confirm password</string>
+    <string name="action_register">S\'inscrire</string>
+
+    <!-- Strings splash_fragment -->
+    <string name="splash_text">Louez avec aisance et vivez l\'expérience.</string>
+    <string name="splash_logo_text">LoueToutFacile</string>
+    <string name="logo_description">Logo de l\'entreprise LoueToutFacile</string>
+    <string name="delete_reservation_description">Supprimer la réservation</string>
+
+    <!-- Strings item_rv_announcement -->
+    <string name="article_image_description">Image de l\'article</string>
+    <string name="article_description">Description de l\'article</string>
+    <string name="article_title">Titre de l\'article</string>
+    <string name="article_price">Prix de l\'article</string>
+    <string name="see_announcement">Voir plus >></string>
+
+</resources>
+
+
