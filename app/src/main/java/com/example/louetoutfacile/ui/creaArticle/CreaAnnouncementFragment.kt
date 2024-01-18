@@ -30,14 +30,8 @@ class CreaAnnouncementFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentCreaAnnouncementBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         binding.etPictureCreaAnnouncementFragment.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -64,20 +58,33 @@ class CreaAnnouncementFragment : Fragment() {
             val imageUrl = binding.etPictureCreaAnnouncementFragment.text.toString()
             val categoryIdButtonId = binding.radioGroup.checkedRadioButtonId
             val statusButtonId = binding.radioGroup2.checkedRadioButtonId
-            val price = binding.etPriceCreaAnnouncementFragment.text.toString().toDoubleOrNull() ?: 0.0
+            val price =
+                binding.etPriceCreaAnnouncementFragment.text.toString().toDoubleOrNull() ?: 0.0
 
-            viewModel.submitAnnouncement(title, content, imageUrl, categoryIdButtonId, statusButtonId, price)
+            viewModel.submitAnnouncement(
+                title,
+                content,
+                imageUrl,
+                categoryIdButtonId,
+                statusButtonId,
+                price
+            )
         }
 
 
         viewModel.insertionSuccess.observe(viewLifecycleOwner) { success ->
             if (success) {
-                Toast.makeText(context, "Votre annonce a bien été créée.", Toast.LENGTH_SHORT).show()
-                findNavController().navigate( CreaAnnouncementFragmentDirections.actionCreaAnnouncementFragmentToMainFragment())
-            }else {
-                Toast.makeText(context, "Échec de la création , veuillez réessayer ultérieurement.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Votre annonce a bien été crée.", Toast.LENGTH_SHORT).show()
+                findNavController().popBackStack(R.id.mainFragment, false)
+            } else {
+                Toast.makeText(
+                    context,
+                    "Échec de la création , veuillez réessayer ultérieurement.",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
+        return binding.root
     }
 
 

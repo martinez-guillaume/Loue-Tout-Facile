@@ -98,8 +98,7 @@ class DetailsAnnouncementViewModel @Inject constructor(
     fun deleteEquipment(equipmentId: Long) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val equipment = equipmentDao.findById(equipmentId)
-                equipment.let {
+                equipmentDao.findById(equipmentId).let {
                     equipmentDao.delete(it)
                     _deletionSuccess.postValue(true)
                 }
@@ -118,8 +117,7 @@ class DetailsAnnouncementViewModel @Inject constructor(
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val equipment = equipmentDao.findById(equipmentId)
-                equipment.let {
+                equipmentDao.findById(equipmentId).let {
                     it.status = 2
                     equipmentDao.update(it)
 
@@ -152,7 +150,7 @@ class DetailsAnnouncementViewModel @Inject constructor(
                 withContext(Dispatchers.Main) {
                     callback(false, Pair("closedDays", "L'agence est fermée les dimanches et lundis."))
                 }
-                return@launch  // Sortie de la coroutine ici
+                return@launch
             }
             try {
                 val existingReservations = reservationDao.getReservationsForEquipment(equipmentId)
@@ -196,7 +194,18 @@ class DetailsAnnouncementViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val reservations = reservationDao.getReservationsForEquipment(equipmentId)
-                val reservationDetails = reservations.map { reservation ->
+                val today = Calendar.getInstance().apply {
+                    set(Calendar.HOUR_OF_DAY, 0)
+                    set(Calendar.MINUTE, 0)
+                    set(Calendar.SECOND, 0)
+                    set(Calendar.MILLISECOND, 0)
+                }.time
+
+                val validReservations = reservations.filter {
+                    it.end_date.after(today) || it.end_date.equals(today)
+                }
+                val reservationDetails = validReservations.map { reservation ->
+                    // Exemple de création d'un objet ReservationDetail
                     val user = userDao.findById(reservation.id_user)
                     val startDateFormatted = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(reservation.start_date)
                     val endDateFormatted = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(reservation.end_date)
@@ -216,16 +225,9 @@ class DetailsAnnouncementViewModel @Inject constructor(
     }
 
 
-    fun deleteReservationsForEquipment(equipmentId: Long) {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                reservationDao.deleteReservationsByEquipmentId(equipmentId)
-                _reservationDeletionSuccess.postValue(true)
-            } catch (e: Exception) {
-                _reservationDeletionSuccess.postValue(false)
-            }
-        }
-    }
+
+
+
     fun deleteReservation(reservationId: Long,equipmentId: Long) {
         viewModelScope.launch(Dispatchers.IO) {
             try {

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
-    tools:context=".ui.agencyPresentation.AgencyPresentation">
+    tools:context=".ui.agencyPresentation.AgencyPresentationFragment">
 
     <TextView
         android:id="@+id/et_title_presentation_agency_fragment"

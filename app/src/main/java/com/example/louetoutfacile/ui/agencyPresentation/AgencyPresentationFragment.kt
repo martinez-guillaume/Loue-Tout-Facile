@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.louetoutfacile.R
 
-class AgencyPresentation : Fragment() {
+class AgencyPresentationFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
