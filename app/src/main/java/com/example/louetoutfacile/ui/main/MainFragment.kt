@@ -42,18 +42,21 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         binding.ivShoppingCartMainFragment.setOnClickListener {
             val callIntent = Intent(Intent.ACTION_CALL)
             callIntent.data = Uri.parse("tel:0665669921") // Remplacez par votre numéro de téléphone
 
-            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CALL_PHONE), REQUEST_PHONE_CALL)
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.CALL_PHONE
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(Manifest.permission.CALL_PHONE),
+                    REQUEST_PHONE_CALL
+                )
             } else {
                 startActivity(callIntent)
             }
@@ -67,7 +70,9 @@ class MainFragment : Fragment() {
             viewModel = viewModel,
             lifecycleOwner = viewLifecycleOwner,
             onItemClicked = { equipmentId ->
-                val action = MainFragmentDirections.actionMainFragmentToDetailAnnouncementFragment(equipmentId)
+                val action = MainFragmentDirections.actionMainFragmentToDetailAnnouncementFragment(
+                    equipmentId
+                )
                 findNavController().navigate(action)
             },
             isAdmin = viewModel.isAdmin() // Passer le bon paramètre
@@ -126,6 +131,8 @@ class MainFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
+
+        return binding.root
     }
 
     override fun onDestroyView() {
@@ -134,7 +141,11 @@ class MainFragment : Fragment() {
     }
 
     // demande de permission pour utiliser le telephone
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_PHONE_CALL && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             val callIntent = Intent(Intent.ACTION_CALL)

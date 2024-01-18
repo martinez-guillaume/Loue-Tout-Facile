@@ -27,7 +27,11 @@ class EditAnnouncementFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentEditAnnouncementBinding.inflate(inflater, container, false)
 
         val equipmentId = arguments?.getLong("equipmentId") ?: return binding.root
@@ -47,38 +51,34 @@ class EditAnnouncementFragment : Fragment() {
                 R.id.rb_manutention_edit_announcement_fragment -> 1
                 R.id.rb_outillage_edit_announcement_fragment -> 2
                 R.id.rb_gardening_edit_article_fragment -> 3
-                else -> 1 // Valeur par défaut
+                else -> 1
             }
 
             val statusId = when (binding.radioGroup4.checkedRadioButtonId) {
                 R.id.rb_status_rented_edit_announcement_fragment -> 1
                 R.id.rb_status_reserved_edit_announcement_fragment -> 2
                 R.id.rb_status_available_edit_article_fragment -> 3
-                else -> 3 // Valeur par défaut
+                else -> 3
             }
 
             val updatedEquipment = Equipment(
                 id = equipmentId,
                 title = binding.etTitleEditAnnouncementFragment.text.toString(),
                 description = binding.etContentEditFragment.text.toString(),
-                price = binding.etPriceEditAnnouncementFragment.text.toString().toDoubleOrNull() ?: 0.0,
+                price = binding.etPriceEditAnnouncementFragment.text.toString().toDoubleOrNull()
+                    ?: 0.0,
                 category = categoryId,
                 status = statusId,
                 imageUrl = binding.etPictureEditAnnouncementFragment.text.toString()
-                 )
+            )
             viewModel.updateEquipment(updatedEquipment)
         }
-
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         viewModel.updateSuccess.observe(viewLifecycleOwner) { success ->
             if (success) {
                 Toast.makeText(context, "Mise à jour réussie", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(EditAnnouncementFragmentDirections.actionEditAnnouncementFragmentToMainFragment())
+                findNavController().popBackStack(R.id.mainFragment, false)
+
             } else {
                 Toast.makeText(context, "Échec de la mise à jour", Toast.LENGTH_SHORT).show()
             }
@@ -102,7 +102,10 @@ class EditAnnouncementFragment : Fragment() {
                 }
             }
         })
+
+        return binding.root
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

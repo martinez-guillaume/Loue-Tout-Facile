@@ -30,12 +30,8 @@ class SignInFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSignInBinding.inflate(inflater, container, false)
-        return binding?.root
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentSignInBinding.inflate(inflater, container, false)
 
         binding?.btnSubmitRegisterFragment?.setOnClickListener {
             val name = binding?.etNameSignInFragment?.text.toString()
@@ -62,15 +58,18 @@ class SignInFragment : Fragment() {
                 binding?.etPasswordRegisterFragment?.error = "Le mot de passe est requis"
                 isValid = false
             } else if (!isPasswordValid(password)) {
-                binding?.etPasswordRegisterFragment?.error = "Le mot de passe doit contenir au moins 8 caractères, une lettre et un chiffre"
+                binding?.etPasswordRegisterFragment?.error =
+                    "Le mot de passe doit contenir au moins 8 caractères, une lettre et un chiffre"
                 isValid = false
             }
             if (confirmPassword.isBlank()) {
-                binding?.etConfirmPasswordRegisterFragment?.error = "La confirmation du mot de passe est requise"
+                binding?.etConfirmPasswordRegisterFragment?.error =
+                    "La confirmation du mot de passe est requise"
                 isValid = false
             }
             if (password != confirmPassword) {
-                binding?.etConfirmPasswordRegisterFragment?.error = "Les mots de passe ne correspondent pas"
+                binding?.etConfirmPasswordRegisterFragment?.error =
+                    "Les mots de passe ne correspondent pas"
                 isValid = false
             }
 
@@ -85,7 +84,10 @@ class SignInFragment : Fragment() {
                 findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToHomeFragment())
             }
         }
+
+        return binding?.root
     }
+
 
     private fun isPasswordValid(password: String): Boolean {
         // Exemple de regex : au moins 8 caractères, une lettre et un chiffre

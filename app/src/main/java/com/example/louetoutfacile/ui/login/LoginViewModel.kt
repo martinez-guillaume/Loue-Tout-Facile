@@ -1,6 +1,5 @@
 package com.example.feedarticlesjetpack.ui.login
 
-import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,9 +17,9 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
 
     private val userDao: UserDao,
-    private val userRepository: UserRepository,
+    private val user: UserRepository,
 
-) : ViewModel() {
+    ) : ViewModel() {
 
     private val _loginState = MutableLiveData<Boolean>()
     val loginState: LiveData<Boolean> get() = _loginState
@@ -31,7 +30,7 @@ class LoginViewModel @Inject constructor(
                 val hashedPassword = hashPassword(password)
                 val user = userDao.findByLogin(login)
                 if (user != null && user.password == hashedPassword) {
-                    userRepository.saveUserDetails(user.id, user.name, user.login, user.isAdmin)
+                    this@LoginViewModel.user.saveUserDetails(user.id, user.name, user.login, user.isAdmin)
                     _loginState.postValue(true)
                 } else {
                     _loginState.postValue(false)

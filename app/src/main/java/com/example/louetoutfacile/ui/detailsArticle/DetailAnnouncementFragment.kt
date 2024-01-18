@@ -49,7 +49,6 @@ class DetailAnnouncementFragment : Fragment() {
         viewModel.loadEquipmentDetails(equipmentId)
 
         binding.ivEditDetailsAnnouncementFragment.setOnClickListener {
-            val equipmentId = arguments?.getLong("equipmentId") ?: return@setOnClickListener
             findNavController().navigate(
                 DetailAnnouncementFragmentDirections.actionDetailAnnouncementFragmentToEditAnnouncementFragment(
                     equipmentId
@@ -130,14 +129,19 @@ class DetailAnnouncementFragment : Fragment() {
             try {
                 val startDate = dateFormat.parse(startDateText)
                 val endDate = dateFormat.parse(endDateText)
-                val currentDate = Date()
+                val currentDate = Calendar.getInstance().apply {
+                    set(Calendar.HOUR_OF_DAY, 0)
+                    set(Calendar.MINUTE, 0)
+                    set(Calendar.SECOND, 0)
+                    set(Calendar.MILLISECOND, 0)
+                }.time
 
                 if (startDate == null || endDate == null) {
                     Toast.makeText(context, "Erreur de format de date.", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
 
-                // Vérifier si les dates sont valides
+                // Vérifie si les dates sont valides
                 if (startDate.before(currentDate) || endDate.before(currentDate) || endDate.before(
                         startDate
                     )
@@ -183,6 +187,7 @@ class DetailAnnouncementFragment : Fragment() {
 
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -207,19 +212,24 @@ class DetailAnnouncementFragment : Fragment() {
             adapter.submitList(details)
 
             if (viewModel.isAdmin()) {
+                binding.tvTitleDetailReservationDetailAnnouncementFragment.visibility = View.VISIBLE
                 if (details.isNullOrEmpty()) {
                     binding.rvReservationDetailAnnouncementFragment.visibility = View.GONE
                     binding.tvNoReservationDetailFragment.visibility = View.VISIBLE
-                    binding.btnReinitialisationDetailAnnouncementFragment.visibility = View.GONE
                 } else {
                     binding.rvReservationDetailAnnouncementFragment.visibility = View.VISIBLE
                     binding.tvNoReservationDetailFragment.visibility = View.GONE
-                    binding.btnReinitialisationDetailAnnouncementFragment.visibility = View.VISIBLE
                 }
             }else {
                 binding.rvReservationDetailAnnouncementFragment.visibility = View.GONE
-                binding.btnReinitialisationDetailAnnouncementFragment.visibility = View.GONE
                 binding.tvNoReservationDetailFragment.visibility = View.GONE
+                binding.tvTitleDetailReservationDetailAnnouncementFragment.visibility = View.GONE
+            }
+        }
+        //suppression d'une réservation
+        viewModel.singleReservationDeletionSuccess.observe(viewLifecycleOwner) { success ->
+            if (success) {
+                Toast.makeText(context, "Réservation supprimée", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -233,43 +243,15 @@ class DetailAnnouncementFragment : Fragment() {
                 .setNegativeButton("Non", null)
                 .show()
         }
-        viewModel.singleReservationDeletionSuccess.observe(viewLifecycleOwner) { success ->
+        viewModel.deletionSuccess.observe(viewLifecycleOwner) { success ->
             if (success) {
-                Toast.makeText(context, "Réservation supprimée", Toast.LENGTH_SHORT).show()
-            }
-        }
+                Toast.makeText(context, "Annonce supprimée", Toast.LENGTH_SHORT).show()
+                DetailAnnouncementFragmentDirections.actionDetailAnnouncementFragmentToMainFragment().let {
+                    findNavController().popBackStack(R.id.mainFragment, false)
 
-
-        // affichage selon
-        if (viewModel.isAdmin()) {
-            binding.tvTitleDetailReservationDetailAnnouncementFragment.visibility = View.VISIBLE
-            binding.btnReinitialisationDetailAnnouncementFragment.visibility = View.VISIBLE
-        } else {
-            binding.tvTitleDetailReservationDetailAnnouncementFragment.visibility = View.GONE
-            binding.btnReinitialisationDetailAnnouncementFragment.visibility = View.GONE
-        }
-
-
-        // Suppression de toutes les réservations
-        binding.btnReinitialisationDetailAnnouncementFragment.setOnClickListener {
-            AlertDialog.Builder(requireContext())
-                .setTitle("Confirmer la réinitialisation")
-                .setMessage("Êtes-vous sûr de vouloir réinitialiser la liste des réservations ?")
-                .setPositiveButton("Oui") { _, _ ->
-                    viewModel.deleteReservationsForEquipment(
-                        equipmentId
-                    )
                 }
-                .setNegativeButton("Non", null)
-                .show()
-        }
-        viewModel.reservationDeletionSuccess.observe(viewLifecycleOwner) { success ->
-            if (success) {
-                Toast.makeText(context, "Les réservations ont bien été réinitialisées.", Toast.LENGTH_SHORT).show()
-                viewModel.loadReservationDetails(equipmentId)
             }
         }
-
     }
 
 

@@ -224,11 +224,11 @@ interface ReservationDao {
     @Query("SELECT * FROM reservation WHERE id = :reservationId")
     fun findById(reservationId: Long): Reservation
 
-    @Query("SELECT * FROM reservation WHERE id_equipment = :equipmentId")
-    fun getReservationsForEquipment(equipmentId: Long): List<Reservation>
-
     @Query("SELECT COUNT(*) FROM reservation WHERE id_equipment = :equipmentId")
     suspend fun countReservationsForEquipment(equipmentId: Long): Int
+
+    @Query("SELECT COUNT(*) FROM reservation WHERE id_equipment = :equipmentId AND end_date >= :today")
+    suspend fun countActiveReservationsForEquipment(equipmentId: Long, today: Date): Int
 
     @Query("DELETE FROM reservation WHERE id_equipment = :equipmentId")
     fun deleteReservationsByEquipmentId(equipmentId: Long)
@@ -236,6 +236,8 @@ interface ReservationDao {
     @Query("DELETE FROM reservation WHERE id = :reservationId")
     fun deleteReservationById(reservationId: Long)
 
+    @Query("SELECT * FROM reservation WHERE id_equipment = :equipmentId ORDER BY start_date ASC")
+    fun getReservationsForEquipment(equipmentId: Long): List<Reservation>
 
     @Insert
     fun insert(reservation: Reservation)

@@ -12,7 +12,14 @@
         tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_splashFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment
@@ -26,8 +33,8 @@
         <action
             android:id="@+id/action_loginFragment_to_mainFragment"
             app:destination="@id/mainFragment"
-            app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="false"/>
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment
@@ -62,8 +69,8 @@
         <action
             android:id="@+id/action_signInFragment_to_homeFragment"
             app:destination="@id/mainFragment"
-            app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="false"/>
+            app:popUpTo="@id/signInFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
 
@@ -74,12 +81,15 @@
         tools:layout="@layout/fragment_crea_announcement" />
     <action
         android:id="@+id/action_creaAnnouncementFragment_to_mainFragment"
-        app:destination="@id/mainFragment" />
+        app:destination="@id/mainFragment"
+        app:popUpTo="@id/creaAnnouncementFragment"
+        app:popUpToInclusive="true"/>
+
 
 
     <fragment
         android:id="@+id/agencyPresentation"
-        android:name="com.example.louetoutfacile.ui.agencyPresentation.AgencyPresentation"
+        android:name="com.example.louetoutfacile.ui.agencyPresentation.AgencyPresentationFragment"
         android:label="fragment_agency_presentation"
         tools:layout="@layout/fragment_agency_presentation" />
 
@@ -100,14 +110,16 @@
             app:argType="long" />
         <action
             android:id="@+id/action_detailAnnouncementFragment_to_editAnnouncementFragment"
-            app:destination="@id/editAnnouncementFragment" >
+            app:destination="@id/editAnnouncementFragment">
         <argument
             android:name="equipmentId"
             app:argType="long" />
         </action>
         <action
             android:id="@+id/actionDetailAnnouncementFragmentToMainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/detailAnnouncementFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
 
@@ -121,6 +133,8 @@
             app:argType="long" />
         <action
             android:id="@+id/action_editAnnouncementFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/detailAnnouncementFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

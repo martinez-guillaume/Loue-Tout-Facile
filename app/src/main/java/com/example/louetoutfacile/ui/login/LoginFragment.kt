@@ -25,11 +25,6 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         binding.tvRegisterLoginFragment.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signInFragment)
@@ -62,7 +57,10 @@ class LoginFragment : Fragment() {
                 Toast.makeText(requireContext(), "Non connecter", Toast.LENGTH_SHORT).show()
             }
         }
+
+        return binding.root
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

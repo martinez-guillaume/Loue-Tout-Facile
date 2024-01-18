@@ -12,6 +12,7 @@ import com.example.louetoutfacile.network.ReservationDao
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.Calendar
 import javax.inject.Inject
 
 @HiltViewModel
@@ -72,7 +73,13 @@ class MainViewModel @Inject constructor (
         val count = MutableLiveData<Int>()
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val reservationCount = reservationDao.countReservationsForEquipment(equipmentId)
+                val today = Calendar.getInstance().apply {
+                    set(Calendar.HOUR_OF_DAY, 0)
+                    set(Calendar.MINUTE, 0)
+                    set(Calendar.SECOND, 0)
+                    set(Calendar.MILLISECOND, 0)
+                }.time
+                val reservationCount = reservationDao.countActiveReservationsForEquipment(equipmentId, today)
                 count.postValue(reservationCount)
             } catch (e: Exception) {
                 Log.e("MainViewModel", "Erreur lors de la récupération du nombre de réservations", e)
