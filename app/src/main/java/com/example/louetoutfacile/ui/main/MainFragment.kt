@@ -45,7 +45,7 @@ class MainFragment : Fragment() {
 
         binding.ivShoppingCartMainFragment.setOnClickListener {
             val callIntent = Intent(Intent.ACTION_CALL)
-            callIntent.data = Uri.parse("tel:0665669921") // Remplacez par votre numéro de téléphone
+            callIntent.data = Uri.parse("tel:0665669921")
 
             if (ContextCompat.checkSelfPermission(
                     requireContext(),
@@ -63,7 +63,6 @@ class MainFragment : Fragment() {
         }
 
 
-        // recupére l'état d'administrateur depuis le ViewModel
         viewModel.isAdmin()
 
         val adapter = AnnouncementListAdapter(
@@ -75,7 +74,7 @@ class MainFragment : Fragment() {
                 )
                 findNavController().navigate(action)
             },
-            isAdmin = viewModel.isAdmin() // Passer le bon paramètre
+            isAdmin = viewModel.isAdmin()
         )
 
         binding.recyclerView.apply {

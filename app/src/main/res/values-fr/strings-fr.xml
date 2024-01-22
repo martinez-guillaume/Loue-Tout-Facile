@@ -119,6 +119,60 @@ La location prend effet lorsque l'équipement est mis à la disposition du locat
     <string name="article_price">Prix de l\'article</string>
     <string name="see_announcement">Voir plus >></string>
 
+    <!-- Toast messages for CreaAnnouncementFragment -->
+    <string name="toast_announcement_created">Votre annonce a été créée avec succès.</string>
+    <string name="toast_announcement_creation_failed">La création a échoué, veuillez réessayer plus tard.</string>
+    <string name="error_title_required">Le titre est requis.</string>
+    <string name="error_content_required">Le contenu est requis.</string>
+    <string name="error_image_url_required">L\'URL de l\'image est requise.</string>
+    <string name="error_valid_price_required">Un prix valide est requis.</string>
+
+    <!-- Messages Toast pour DetailAnnouncementFragment -->
+    <string name="toast_reservation_deleted">Réservation supprimée</string>
+    <string name="alert_dialog_confirm_deletion">Confirmer la suppression</string>
+    <string name="alert_dialog_confirm_deletion_message">Êtes-vous sûr de vouloir supprimer l\'annonce ?</string>
+    <string name="alert_dialog_yes">Oui</string>
+    <string name="alert_dialog_no">Non</string>
+    <string name="toast_announcement_deleted">Annonce supprimée</string>
+    <string name="toast_invalid_date_format">Format de date invalide</string>
+    <string name="toast_please_select_valid_dates">Veuillez sélectionner des dates valides</string>
+    <string name="alert_dialog_confirm_reservation">Confirmer la réservation</string>
+    <string name="alert_dialog_confirm_reservation_message">Voulez-vous réserver du %1$s au %2$s ?</string> <!-- %1$s et %2$s seront remplacés par les dates de début et de fin dans le code -->
+    <string name="toast_selected_dates_not_available">Les dates sélectionnées ne sont pas disponibles</string>
+    <string name="status_in_store">En magasin</string>
+    <string name="status_on_rental">En location</string>
+    <string name="status_out_of_store">Hors du magasin</string>
+    <string name="status_not_available_today">Non disponible aujourd\'hui</string>
+    <string name="reservation_confirmed_title">\uD83C\uDF89 Réservation confirmée ! \uD83C\uDF89</string>
+    <string name="confirm_deletion_title">Confirmer la suppression</string>
+    <string name="confirm_deletion_message">Êtes-vous sûr de vouloir supprimer cette réservation ?</string>
+    <string name="information">Information</string>
+    <string name="ok">OK</string>
+    <string name="toast_select_valid_dates">Veuillez sélectionner des dates valides.</string>
+    <string name="alert_dialog_confirm_reservation_title">Confirmer la réservation</string>
+    <string name="alert_dialog_unavailable_dates">Les dates sélectionnées ne sont pas disponibles. \n\nRéservations existantes du : %1$s</string>
+    <string name="start_date_placeholder">Début</string>
+    <string name="end_date_placeholder">Fin</string>
+
+    <!--Toast messages  Edit announcement fragment -->
+    <string name="error_description_required">La description est requise</string>
+    <string name="toast_update_successful">Mise à jour réussie</string>
+    <string name="toast_update_failed">Échec de la mise à jour</string>
+
+    <!-- Toast dans le fragment de connexion -->
+    <string name="error_login_required">Le login est requis</string>
+    <string name="error_password_required">Le mot de passe est requis</string>
+    <string name="toast_login_failed">Échec de la connexion</string>
+
+    <!-- Messages Toast pour SignUpFragment -->
+    <string name="error_name_required">Le nom est requis</string>
+    <string name="error_firstname_required">Le prénom est requis</string>
+    <string name="error_password_required_signup">Le mot de passe est requis</string>
+    <string name="error_password_invalid">Le mot de passe doit contenir au moins 8 caractères, dont une lettre et un chiffre</string>
+    <string name="error_confirm_password_required">La confirmation du mot de passe est requise</string>
+    <string name="error_passwords_do_not_match">Les mots de passe ne correspondent pas</string>
+    <string name="toast_registration_successful">Inscription réussie</string>
+
 </resources>
 
 

@@ -30,8 +30,6 @@ class EditAnnouncementViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val equipment = equipmentDao.findById(equipmentId)
-                // Vérifiez si equipment contient la bonne valeur de prix
-                Log.d("EditAnnouncementVM", "Loaded equipment price: ${equipment.price}")
                 _equipmentDetails.postValue(equipment)
             } catch (e: Exception) {
                 Log.e("EditAnnouncementVM", "Error loading equipment details", e)

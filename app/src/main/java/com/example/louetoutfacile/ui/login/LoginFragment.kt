@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.feedarticlesjetpack.ui.login.LoginViewModel
+import com.example.louetoutfacile.ui.login.LoginViewModel
 import com.example.louetoutfacile.R
 import com.example.louetoutfacile.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,11 +37,11 @@ class LoginFragment : Fragment() {
             var isValid = true
 
             if (login.isBlank()) {
-                binding.etLoginLoginFragment.error = "L'identifiant est requis"
+                binding.etLoginLoginFragment.error = getString(R.string.error_login_required)
                 isValid = false
             }
             if (password.isBlank()) {
-                binding.etPasswordLoginFragment.error = "Le mot de passe est requis"
+                binding.etPasswordLoginFragment.error = getString(R.string.error_password_required)
                 isValid = false
             }
 
@@ -54,7 +54,7 @@ class LoginFragment : Fragment() {
             if (isSuccess) {
                 findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
             } else {
-                Toast.makeText(requireContext(), "Non connecter", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.toast_login_failed), Toast.LENGTH_SHORT).show()
             }
         }
 

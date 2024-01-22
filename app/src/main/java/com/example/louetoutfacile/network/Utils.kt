@@ -1,4 +1,4 @@
-package com.example.feedarticlesjetpack.network
+package com.example.louetoutfacile.network
 
 import android.content.Context
 import android.widget.ImageView

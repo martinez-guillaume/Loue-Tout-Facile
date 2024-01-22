@@ -1,6 +1,6 @@
-
 package com.example.louetoutfacile.ui.detailsArticle
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -46,7 +46,18 @@ class DetailAnnouncementFragment : Fragment() {
         _binding = FragmentDetailAnnouncementBinding.inflate(inflater, container, false)
 
         val equipmentId = arguments?.getLong("equipmentId") ?: return binding.root
+
+        // Configuration du RecyclerView pour les réservations
+        val adapter = ReservationListAdapter { reservationId ->
+            onDeleteReservationClicked(reservationId, equipmentId)
+        }
+
+        binding.rvReservationDetailAnnouncementFragment.adapter = adapter
+        binding.rvReservationDetailAnnouncementFragment.layoutManager = LinearLayoutManager(context)
+
         viewModel.loadEquipmentDetails(equipmentId)
+        viewModel.loadReservationDetails(equipmentId)
+
 
         binding.ivEditDetailsAnnouncementFragment.setOnClickListener {
             findNavController().navigate(
@@ -56,7 +67,7 @@ class DetailAnnouncementFragment : Fragment() {
             )
         }
 
-
+        // affichage des données
         viewModel.equipmentDetails.observe(viewLifecycleOwner) { equipment ->
             binding.tvTitleDetailsAnnouncementFragment.text = equipment.title
             binding.tvContentDetailsAnnouncementFragment.text = equipment.description
@@ -71,11 +82,11 @@ class DetailAnnouncementFragment : Fragment() {
             // Changer la couleur en fonction du statut de réservation
             val statusColor = when (statusName) {
                 //admin
-                "En magasin" -> ContextCompat.getColor(requireContext(), R.color.green)
-                "En location" -> ContextCompat.getColor(requireContext(), R.color.red)
-                "En dehors du magasin" -> ContextCompat.getColor(requireContext(), R.color.orange)
+                getString(R.string.status_in_store) -> ContextCompat.getColor(requireContext(), R.color.green)
+                getString(R.string.status_on_rental) -> ContextCompat.getColor(requireContext(), R.color.red)
+                getString(R.string.status_out_of_store) -> ContextCompat.getColor(requireContext(), R.color.orange)
                 //user
-                "Non disponible aujourd'hui" -> ContextCompat.getColor(
+                getString(R.string.status_not_available_today) -> ContextCompat.getColor(
                     requireContext(),
                     R.color.orange
                 )
@@ -85,6 +96,7 @@ class DetailAnnouncementFragment : Fragment() {
             binding.tvStatusDetailAnnouncementFragment.setTextColor(statusColor)
         }
 
+        // affichage des icons d'édition , de suppression selon is admin ou pas.
         if (viewModel.isAdmin()) {
             binding.ivDeleteDetailsAnnouncementFragment.visibility = View.VISIBLE
             binding.ivEditDetailsAnnouncementFragment.visibility = View.VISIBLE
@@ -92,22 +104,21 @@ class DetailAnnouncementFragment : Fragment() {
             binding.ivDeleteDetailsAnnouncementFragment.visibility = View.GONE
             binding.ivEditDetailsAnnouncementFragment.visibility = View.GONE
         }
+
         binding.datePickerButton.setOnClickListener {
             showDatePickerDialog(binding.datePickerButton)
         }
-
         binding.datePickerButton2.setOnClickListener {
             showDatePickerDialog(binding.datePickerButton2)
         }
 
 
-
         viewModel.reservationMessage.observe(viewLifecycleOwner) { message ->
             if (message.isNotEmpty()) {
                 AlertDialog.Builder(requireContext())
-                    .setTitle("\uD83C\uDF89 Réservation Confirmée ! \uD83C\uDF89")
+                    .setTitle(getString(R.string.reservation_confirmed_title))
                     .setMessage(message)
-                    .setPositiveButton("OK", null)
+                    .setPositiveButton(getString(R.string.ok), null)
                     .show()
             }
         }
@@ -117,10 +128,10 @@ class DetailAnnouncementFragment : Fragment() {
             val startDateText = binding.datePickerButton.text.toString()
             val endDateText = binding.datePickerButton2.text.toString()
 
-            if (startDateText == "Début" || endDateText == "Fin") {
+            if (startDateText == getString(R.string.start_date_placeholder) || endDateText == getString(R.string.end_date_placeholder)) {
                 Toast.makeText(
                     context,
-                    "Veuillez choisir une date de début et de fin de location.",
+                    getString(R.string.toast_please_select_valid_dates),
                     Toast.LENGTH_SHORT
                 ).show()
                 return@setOnClickListener
@@ -137,7 +148,7 @@ class DetailAnnouncementFragment : Fragment() {
                 }.time
 
                 if (startDate == null || endDate == null) {
-                    Toast.makeText(context, "Erreur de format de date.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.toast_invalid_date_format), Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
 
@@ -148,7 +159,7 @@ class DetailAnnouncementFragment : Fragment() {
                 ) {
                     Toast.makeText(
                         context,
-                        "Veuillez sélectionner des dates valides.",
+                        getString(R.string.toast_select_valid_dates),
                         Toast.LENGTH_SHORT
                     ).show()
                     return@setOnClickListener
@@ -160,51 +171,29 @@ class DetailAnnouncementFragment : Fragment() {
                         isAvailable, unavailableDatesInfo ->
                     if (isAvailable) {
                         AlertDialog.Builder(requireContext())
-                            .setTitle("Confirmer la réservation")
-                            .setMessage("Voulez-vous réserver du $startDateText au $endDateText ?")
-                            .setPositiveButton("Oui") { _, _ ->
+                            .setTitle(getString(R.string.alert_dialog_confirm_reservation_title))
+                            .setMessage(getString(R.string.alert_dialog_confirm_reservation_message, startDateText, endDateText))
+                            .setPositiveButton(getString(R.string.alert_dialog_yes)) { _, _ ->
                                 viewModel.reserveEquipment(equipmentId, startDate, endDate)
                             }
-                            .setNegativeButton("Non", null)
+                            .setNegativeButton(getString(R.string.alert_dialog_no), null)
                             .show()
                     } else {
                         val dialogMessage = when (unavailableDatesInfo.first) {
                             "closedDays" -> unavailableDatesInfo.second
-                            else -> "Les dates sélectionnées ne sont pas disponibles. \n\nRéservations existantes du : ${unavailableDatesInfo.second}"
+                            else -> getString(R.string.alert_dialog_unavailable_dates, unavailableDatesInfo.second)
                         }
                         AlertDialog.Builder(requireContext())
-                            .setTitle("Information")
+                            .setTitle(getString(R.string.information))
                             .setMessage(dialogMessage)
-                            .setPositiveButton("OK", null)
+                            .setPositiveButton(getString(R.string.ok), null)
                             .show()
                     }
                 }
             }catch (e: ParseException) {
-                Toast.makeText(context, "Format de date invalide.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.toast_invalid_date_format), Toast.LENGTH_SHORT).show()
             }
         }
-
-
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val equipmentId = arguments?.getLong("equipmentId") ?: return
-
-
-        // Configuration du RecyclerView
-        val adapter = ReservationListAdapter { reservationId ->
-            onDeleteReservationClicked(reservationId, equipmentId)
-        }
-
-        binding.rvReservationDetailAnnouncementFragment.adapter = adapter
-        binding.rvReservationDetailAnnouncementFragment.layoutManager = LinearLayoutManager(context)
-
-        viewModel.loadEquipmentDetails(equipmentId)
-        viewModel.loadReservationDetails(equipmentId)
-
 
 
         // affichage de la gestion des réservation selon admin ou pas.
@@ -229,33 +218,34 @@ class DetailAnnouncementFragment : Fragment() {
         //suppression d'une réservation
         viewModel.singleReservationDeletionSuccess.observe(viewLifecycleOwner) { success ->
             if (success) {
-                Toast.makeText(context, "Réservation supprimée", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.toast_reservation_deleted), Toast.LENGTH_SHORT).show()
             }
         }
 
-
         // suppression d'un article
-            binding.ivDeleteDetailsAnnouncementFragment.setOnClickListener {
+        binding.ivDeleteDetailsAnnouncementFragment.setOnClickListener {
             AlertDialog.Builder(requireContext())
-                .setTitle("Confirmer la suppression")
-                .setMessage("Êtes-vous sûr de vouloir supprimer cette annonce ?")
-                .setPositiveButton("Oui") { _, _ -> viewModel.deleteEquipment(equipmentId) }
-                .setNegativeButton("Non", null)
+                .setTitle(getString(R.string.alert_dialog_confirm_deletion))
+                .setMessage(getString(R.string.alert_dialog_confirm_deletion_message))
+                .setPositiveButton(getString(R.string.alert_dialog_yes)) { _, _ -> viewModel.deleteEquipment(equipmentId) }
+                .setNegativeButton(getString(R.string.alert_dialog_no), null)
                 .show()
         }
         viewModel.deletionSuccess.observe(viewLifecycleOwner) { success ->
             if (success) {
-                Toast.makeText(context, "Annonce supprimée", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,  getString(R.string.toast_announcement_deleted), Toast.LENGTH_SHORT).show()
                 DetailAnnouncementFragmentDirections.actionDetailAnnouncementFragmentToMainFragment().let {
                     findNavController().popBackStack(R.id.mainFragment, false)
 
                 }
             }
         }
+
+        return binding.root
     }
 
 
-    
+
 
     private fun showDatePickerDialog(datePickerButton: Button) {
         val calendar = Calendar.getInstance()
@@ -274,15 +264,14 @@ class DetailAnnouncementFragment : Fragment() {
 
     private fun onDeleteReservationClicked(reservationId: Long, equipmentId: Long) {
         AlertDialog.Builder(requireContext())
-            .setTitle("Confirmer la suppression")
-            .setMessage("Êtes-vous sûr de vouloir supprimer cette réservation ?")
-            .setPositiveButton("Oui") { _, _ ->
+            .setTitle(getString(R.string.confirm_deletion_title))
+            .setMessage(getString(R.string.confirm_deletion_message))
+            .setPositiveButton(getString(R.string.alert_dialog_yes)) { _, _ ->
                 viewModel.deleteReservation(reservationId, equipmentId)
             }
-            .setNegativeButton("Non", null)
+            .setNegativeButton(getString(R.string.alert_dialog_no), null)
             .show()
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

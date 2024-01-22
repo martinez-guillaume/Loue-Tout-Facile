@@ -25,7 +25,6 @@ class CreaAnnouncementViewModel @Inject constructor (
     val insertionSuccess: LiveData<Boolean> = _insertionSuccess
 
     fun createAnnouncement(title: String, content: String, imageUrl: String, categoryId: Int, status: Int, price: Double) {
-        Log.d("CreaAnnouncementVM", "Début de la création d'une annonce")
         viewModelScope.launch(Dispatchers.IO) {
             try {
                val equipment = Equipment(0, title, content, categoryId, status, price, imageUrl)
@@ -48,7 +47,7 @@ class CreaAnnouncementViewModel @Inject constructor (
             R.id.rb_manutention_crea_announcement_fragment -> 1
             R.id.rb_outillage_crea_announcement_fragment -> 2
             R.id.rb_gardening_crea_article_fragment -> 3
-            else -> 1 // Valeur par défaut ou gestion d'erreur
+            else -> 1 // Valeur par défaut (manutention)
         }
     }
 
@@ -57,8 +56,7 @@ class CreaAnnouncementViewModel @Inject constructor (
             R.id.rb_status_rented_crea_announcement_fragment -> 1
             R.id.rb_status_reserved_crea_announcement_fragment -> 2
             R.id.rb_status_available_crea_article_fragment -> 3
-            else -> 1
+            else -> 1 // statut de l'annonce par défaut (louer)
         }
     }
-
 }

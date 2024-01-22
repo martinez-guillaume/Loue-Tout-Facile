@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.feedarticlesjetpack.network.UserRepository
+import com.example.louetoutfacile.network.UserRepository
 import com.example.louetoutfacile.R
 import com.example.louetoutfacile.network.User
 import dagger.hilt.android.AndroidEntryPoint

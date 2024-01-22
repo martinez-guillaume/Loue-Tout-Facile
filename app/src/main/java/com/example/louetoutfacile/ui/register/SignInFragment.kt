@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.feedarticlesjetpack.ui.register.SignInViewModel
+import com.example.louetoutfacile.ui.register.SignInViewModel
 import com.example.louetoutfacile.R
 import com.example.louetoutfacile.databinding.FragmentSignInBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,33 +43,33 @@ class SignInFragment : Fragment() {
             var isValid = true
 
             if (name.isBlank()) {
-                binding?.etNameSignInFragment?.error = "Le nom est requis"
+                binding?.etNameSignInFragment?.error = getString(R.string.error_name_required)
                 isValid = false
             }
             if (firstname.isBlank()) {
-                binding?.etFirstnameSignInFragment?.error = "Le prénom est requis"
+                binding?.etFirstnameSignInFragment?.error = getString(R.string.error_firstname_required)
                 isValid = false
             }
             if (login.isBlank()) {
-                binding?.etLoginRegisterFragment?.error = "L'identifiant est requis"
+                binding?.etLoginRegisterFragment?.error = getString(R.string.error_login_required)
                 isValid = false
             }
             if (password.isBlank()) {
-                binding?.etPasswordRegisterFragment?.error = "Le mot de passe est requis"
+                binding?.etPasswordRegisterFragment?.error = getString(R.string.error_password_required)
                 isValid = false
             } else if (!isPasswordValid(password)) {
                 binding?.etPasswordRegisterFragment?.error =
-                    "Le mot de passe doit contenir au moins 8 caractères, une lettre et un chiffre"
+                    getString(R.string.error_password_invalid)
                 isValid = false
             }
             if (confirmPassword.isBlank()) {
                 binding?.etConfirmPasswordRegisterFragment?.error =
-                    "La confirmation du mot de passe est requise"
+                    getString(R.string.error_confirm_password_required)
                 isValid = false
             }
             if (password != confirmPassword) {
                 binding?.etConfirmPasswordRegisterFragment?.error =
-                    "Les mots de passe ne correspondent pas"
+                    getString(R.string.error_passwords_do_not_match)
                 isValid = false
             }
 
@@ -80,7 +80,7 @@ class SignInFragment : Fragment() {
 
         viewModel.inscriptionState.observe(viewLifecycleOwner) { state ->
             if (state) {
-                Toast.makeText(context, "Inscription réussie", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.toast_registration_successful), Toast.LENGTH_LONG).show()
                 findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToHomeFragment())
             }
         }
@@ -90,7 +90,7 @@ class SignInFragment : Fragment() {
 
 
     private fun isPasswordValid(password: String): Boolean {
-        // Exemple de regex : au moins 8 caractères, une lettre et un chiffre
+        // regex : au moins 8 caractères, une lettre et un chiffre
         val passwordRegex = "^(?=.*[0-9])(?=.*[a-zA-Z]).{8,}$".toRegex()
         return password.matches(passwordRegex)
     }

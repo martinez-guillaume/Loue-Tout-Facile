@@ -44,7 +44,6 @@ class MainViewModel @Inject constructor (
 
     fun logoutUser() {
         viewModelScope.launch {
-            // Effacer les données de session
             with(sharedPreferences.edit()) {
                 clear()
                 apply()
@@ -54,7 +53,6 @@ class MainViewModel @Inject constructor (
     fun isAdmin(): Boolean {
        // return sharedPreferences.getBoolean("isAdmin", false)
         val isAdmin = sharedPreferences.getBoolean("isAdmin", false)
-        Log.d("MainViewModel", "Is Admin: $isAdmin")
         return isAdmin
     }
 
@@ -87,5 +85,4 @@ class MainViewModel @Inject constructor (
         }
         return count
     }
-
 }
