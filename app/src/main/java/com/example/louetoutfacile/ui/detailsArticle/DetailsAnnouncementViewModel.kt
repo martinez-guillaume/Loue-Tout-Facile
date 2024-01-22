@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.feedarticlesjetpack.network.UserRepository
+import com.example.louetoutfacile.network.UserRepository
 import com.example.louetoutfacile.network.Equipment
 import com.example.louetoutfacile.network.EquipmentDao
 import com.example.louetoutfacile.network.Reservation
@@ -61,7 +61,7 @@ class DetailsAnnouncementViewModel @Inject constructor(
     private val _singleReservationDeletionSuccess = MutableLiveData<Boolean>()
     val singleReservationDeletionSuccess: LiveData<Boolean> = _singleReservationDeletionSuccess
 
-
+    // à finir de mettre en vairable dans strings.xml   --------------
     fun loadEquipmentDetails(equipmentId: Long) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -70,14 +70,12 @@ class DetailsAnnouncementViewModel @Inject constructor(
 
                 val statusName = statusDao.getStatusNameById(equipment.status)
                 val displayStatus = if (isAdmin()) {
-                    // Pour un admin, changer le nom du statut
                     when (statusName) {
                         "Disponible", "Réservé" -> "En magasin"
                         "Loué" -> "En dehors du magasin"
                         else -> statusName
                     }
                 } else {
-                    // Pour un utilisateur non admin, laisser le statut tel quel
                     if (statusName == "Réservé" || statusName == "Disponible") "Disponible" else "Non disponible aujourd'hui"
                 }
                 _statusName.postValue(displayStatus)
@@ -89,9 +87,7 @@ class DetailsAnnouncementViewModel @Inject constructor(
 
 
     fun isAdmin(): Boolean {
-        // return sharedPreferences.getBoolean("isAdmin", false)
         val isAdmin = sharedPreferences.getBoolean("isAdmin", false)
-        Log.d("MainViewModel", "Is Admin: $isAdmin")
         return isAdmin
     }
 
@@ -130,7 +126,6 @@ class DetailsAnnouncementViewModel @Inject constructor(
                     loadReservationDetails(equipmentId)
                 }
             } catch (e: Exception) {
-                Log.e("DetailsAnnouncementVM", "Erreur lors de la réservation", e)
                 _reservationMessage.postValue("Erreur lors de la réservation")
             }
         }
@@ -175,7 +170,6 @@ class DetailsAnnouncementViewModel @Inject constructor(
                     }
                 }
             } catch (e: Exception) {
-                Log.e("DetailsAnnouncementVM", "Erreur lors de la vérification des disponibilités", e)
                 withContext(Dispatchers.Main) {
                     callback(false, Pair("error", "Erreur lors de la vérification des disponibilités"))
                 }
@@ -225,9 +219,6 @@ class DetailsAnnouncementViewModel @Inject constructor(
     }
 
 
-
-
-
     fun deleteReservation(reservationId: Long,equipmentId: Long) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -239,7 +230,6 @@ class DetailsAnnouncementViewModel @Inject constructor(
                     _singleReservationDeletionSuccess.postValue(false)
                 }
             } catch (e: Exception) {
-                Log.e("ViewModel", "Erreur lors de la suppression de la réservation", e)
                 _reservationDeletionSuccess.postValue(false)
             }
         }

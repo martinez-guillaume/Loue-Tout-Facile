@@ -46,6 +46,31 @@ class EditAnnouncementFragment : Fragment() {
 
         binding.btnSubmitEditArticleActivity.setOnClickListener {
 
+            val title = binding.etTitleEditAnnouncementFragment.text.toString()
+            val description = binding.etContentEditFragment.text.toString()
+            val imageUrl = binding.etPictureEditAnnouncementFragment.text.toString()
+            val price =
+                binding.etPriceEditAnnouncementFragment.text.toString().toDoubleOrNull() ?: 0.0
+
+            var isValid = true
+
+            if (title.isBlank()) {
+                binding.etTitleEditAnnouncementFragment.error = getString(R.string.error_title_required)
+                isValid = false
+            }
+            if (description.isBlank()) {
+                binding.etContentEditFragment.error = getString(R.string.error_description_required)
+                isValid = false
+            }
+            if (imageUrl.isBlank()) {
+                binding.etPictureEditAnnouncementFragment.error = getString(R.string.error_image_url_required)
+                isValid = false
+            }
+            if (price <= 0.0) {
+                binding.etPriceEditAnnouncementFragment.error = getString(R.string.error_valid_price_required)
+                isValid = false
+            }
+
             // Pour les valeurs de RadioButton, category
             val categoryId = when (binding.radioGroup3.checkedRadioButtonId) {
                 R.id.rb_manutention_edit_announcement_fragment -> 1
@@ -54,33 +79,35 @@ class EditAnnouncementFragment : Fragment() {
                 else -> 1
             }
 
-            val statusId = when (binding.radioGroup4.checkedRadioButtonId) {
-                R.id.rb_status_rented_edit_announcement_fragment -> 1
-                R.id.rb_status_reserved_edit_announcement_fragment -> 2
-                R.id.rb_status_available_edit_article_fragment -> 3
-                else -> 3
-            }
+            if (isValid) {
+                val statusId = when (binding.radioGroup4.checkedRadioButtonId) {
+                    R.id.rb_status_rented_edit_announcement_fragment -> 1
+                    R.id.rb_status_reserved_edit_announcement_fragment -> 2
+                    R.id.rb_status_available_edit_article_fragment -> 3
+                    else -> 3
+                }
 
-            val updatedEquipment = Equipment(
-                id = equipmentId,
-                title = binding.etTitleEditAnnouncementFragment.text.toString(),
-                description = binding.etContentEditFragment.text.toString(),
-                price = binding.etPriceEditAnnouncementFragment.text.toString().toDoubleOrNull()
-                    ?: 0.0,
-                category = categoryId,
-                status = statusId,
-                imageUrl = binding.etPictureEditAnnouncementFragment.text.toString()
-            )
-            viewModel.updateEquipment(updatedEquipment)
+                val updatedEquipment = Equipment(
+                    id = equipmentId,
+                    title = title,
+                    description = description,
+                    price = price.toString().toDoubleOrNull()
+                        ?: 0.0,
+                    category = categoryId,
+                    status = statusId,
+                    imageUrl = imageUrl
+                )
+                viewModel.updateEquipment(updatedEquipment)
+            }
         }
 
         viewModel.updateSuccess.observe(viewLifecycleOwner) { success ->
             if (success) {
-                Toast.makeText(context, "Mise à jour réussie", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,  getString(R.string.toast_update_successful), Toast.LENGTH_SHORT).show()
                 findNavController().popBackStack(R.id.mainFragment, false)
 
             } else {
-                Toast.makeText(context, "Échec de la mise à jour", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.toast_update_failed), Toast.LENGTH_SHORT).show()
             }
         }
 

@@ -1,12 +1,12 @@
-package com.example.feedarticlesjetpack.ui.login
+package com.example.louetoutfacile.ui.login
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.feedarticlesjetpack.network.UserRepository
 import com.example.louetoutfacile.network.UserDao
+import com.example.louetoutfacile.network.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -36,7 +36,6 @@ class LoginViewModel @Inject constructor(
                     _loginState.postValue(false)
                 }
             } catch (e: Exception) {
-                Log.e("LoginViewModel", "Error during login", e)
                 _loginState.postValue(false)
             }
         }

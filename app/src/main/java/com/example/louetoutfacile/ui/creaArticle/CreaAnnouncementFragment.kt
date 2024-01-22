@@ -61,25 +61,46 @@ class CreaAnnouncementFragment : Fragment() {
             val price =
                 binding.etPriceCreaAnnouncementFragment.text.toString().toDoubleOrNull() ?: 0.0
 
-            viewModel.submitAnnouncement(
-                title,
-                content,
-                imageUrl,
-                categoryIdButtonId,
-                statusButtonId,
-                price
-            )
+            var isValid = true
+
+            if (title.isBlank()) {
+                binding.etTitleCreaAnnouncementFragment.error = getString(R.string.error_title_required)
+                isValid = false
+            }
+            if (content.isBlank()) {
+                binding.etContentCreaFragment.error = getString(R.string.error_content_required)
+                isValid = false
+            }
+            if (imageUrl.isBlank()) {
+                binding.etPictureCreaAnnouncementFragment.error = getString(R.string.error_image_url_required)
+                isValid = false
+            }
+            if (price <= 0.0) {
+                binding.etPriceCreaAnnouncementFragment.error = getString(R.string.error_valid_price_required)
+                isValid = false
+            }
+
+            if (isValid) {
+                viewModel.submitAnnouncement(
+                    title,
+                    content,
+                    imageUrl,
+                    categoryIdButtonId,
+                    statusButtonId,
+                    price
+                )
+            }
         }
 
 
         viewModel.insertionSuccess.observe(viewLifecycleOwner) { success ->
             if (success) {
-                Toast.makeText(context, "Votre annonce a bien été crée.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.toast_announcement_created), Toast.LENGTH_SHORT).show()
                 findNavController().popBackStack(R.id.mainFragment, false)
             } else {
                 Toast.makeText(
                     context,
-                    "Échec de la création , veuillez réessayer ultérieurement.",
+                    getString(R.string.toast_announcement_creation_failed),
                     Toast.LENGTH_SHORT
                 ).show()
             }
